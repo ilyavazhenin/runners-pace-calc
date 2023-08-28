@@ -1,11 +1,10 @@
 import './App.css';
+import DistanceRunningPage from './pages/distance-running';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Туть будет моя аппка</h1>
-      </header>
+      <DistanceRunningPage />
     </div>
   );
 }
