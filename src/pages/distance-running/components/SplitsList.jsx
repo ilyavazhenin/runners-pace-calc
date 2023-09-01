@@ -1,20 +1,13 @@
-const SplitElementLi = (props) => {
-  const { value } = props;
-  return <li>{`${value}`}</li>;
-}; //TODO: remove later, just use li inside map and that's it!
+import { useContext } from "react";
+import { SplitsContext } from "../../../Contexts";
 
-const SplitsList = (props) => {
-  const { splits } = props;
+const SplitsList = () => {
+  const { state } = useContext(SplitsContext);
 
   return (
     <ul>
-      {splits.map((split) => (
-        <SplitElementLi
-          value={split}
-          key={split}
-        />
-      ))}
-    </ul>
+      {state?.splits?.length ? state.splits.map((split, index) => <li key={index}>{`${split}`}</li>) : null}
+    </ul> // using index as key in my situiation is OK coz the elemnts won't change
   );
 };
 

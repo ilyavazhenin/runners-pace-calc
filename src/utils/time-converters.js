@@ -4,6 +4,11 @@ const MS_IN_HR = 3600000;
 
 const convertTimeToMs = (time) => time.hrs * MS_IN_HR + time.mins * MS_IN_MIN + time.secs * MS_IN_SEC + time.mss;
 const getTimeString = (time) => `${time.hrs ?? ''}:${time.mins ?? ''}:${time.secs ?? ''}:${time.mss ?? ''}`;
+const getPaceString = ({ mins, secs }) => {
+  const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
+  const secsStr = secs / 10 >= 1 ? `${secs}` : `0${secs}`;
+  return `${minsStr}:${secsStr}`;
+};
 
 const convertTimeToObj = (timeInMs) => {
   const hrs = Math.floor(timeInMs / MS_IN_HR);
@@ -57,9 +62,28 @@ const parseTimeString = (timeString) => {
   return time;
 };
 
-console.log(convertTimeToMs(checkTime), 'time to ms');
-console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
-console.log(calcPaceTime(21.1, checkTime), 'pace');
-console.log(calcFinishTime(21.1, somePace), 'finish time');
-console.log(getTimeString(calcFinishTime(21.1, somePace)), 'time string');
-console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
+const getEvenStringedSplitsArray = (pace, distance) => {
+  const paceString = getPaceString(pace);
+  const stringedArray = [];
+  const arrayLengthByDistance = parseInt(distance);
+  for (let i = 1; i <= arrayLengthByDistance; i += 1) {
+    stringedArray.push(paceString);
+  }
+  if (distance % arrayLengthByDistance > 0) {
+    const tail = distance - arrayLengthByDistance;
+    const tailPaceInMs = convertTimeToMs(pace) * tail;
+    const tailPace = convertTimeToObj(tailPaceInMs);
+    stringedArray.push(getPaceString(tailPace));
+  }
+  return stringedArray;
+};
+
+// console.log(convertTimeToMs(checkTime), 'time to ms');
+// console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
+// console.log(calcPaceTime(21.1, checkTime), 'pace');
+// console.log(calcFinishTime(21.1, somePace), 'finish time');
+// console.log(getTimeString(calcFinishTime(21.1, somePace)), 'time string');
+// console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
+// console.log(getEvenStringedSplitsArray(somePace, 21.1), 'stringed array of pace');
+
+export { calcPaceTime, getEvenStringedSplitsArray };

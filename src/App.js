@@ -4,7 +4,7 @@ import DistanceRunningPage from './pages/distance-running';
 function App() {
   return (
     <div className="App">
-      <DistanceRunningPage />
+        <DistanceRunningPage />
     </div>
   );
 }

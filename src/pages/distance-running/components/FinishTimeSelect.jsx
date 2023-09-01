@@ -1,25 +1,37 @@
 import { useState } from "react";
-import { InputLabel, MenuItem, Select, FormControl } from "@mui/material";
+import { InputLabel, MenuItem, Select, FormControl, Button } from "@mui/material";
+import { calcPaceTime, getEvenStringedSplitsArray } from "../../../utils/time-converters";
+import { SplitsContext } from "../../../Contexts";
+import { useContext } from "react";
 
 const FinishTimeSelectGroup = () => {
+  const { state, dispatch } = useContext(SplitsContext);
   const HOURS_TO_PICK_FROM = [...Array(24).keys()]; // TODO: move to utils later
   const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
 
-  const [hours, setHours] = useState("");
+  const [finishTime, setFinishTime] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
+  
   const handleHours = (e) => {
-    setHours(e.target.value);
+    setFinishTime({...finishTime, hrs: e.target.value});
   };
-
-  const [mins, setMins] = useState("");
   const handleMins = (e) => {
-    setMins(e.target.value);
+    setFinishTime({...finishTime, mins: e.target.value});
   };
 
-  const [secs, setSecs] = useState("");
   const handleSecs = (e) => {
-    setSecs(e.target.value);
+    setFinishTime({...finishTime, secs: e.target.value});
   };
 
+  const countSplits = () => {
+    console.log(finishTime, 'finishTime in calculating');
+    const avgPace = calcPaceTime(state.distance, finishTime); //TODO: GET THE DISTANCE FROM STATE!
+    console.log(avgPace, 'avgPace');
+    const splits = getEvenStringedSplitsArray(avgPace, state.distance);
+    console.log(splits, 'COUNTED SPLITS');
+    return dispatch({ type: 'GET_SPLITS', payload: splits });
+  };
+
+  console.log(finishTime, 'finishTime');
   return (
     <>
       <FormControl
@@ -30,7 +42,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="hours-label"
           id="hours"
-          value={hours}
+          value={finishTime.hrs}
           label="hours"
           onChange={handleHours}
         >
@@ -51,7 +63,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="mins-label"
           id="mins"
-          value={mins}
+          value={finishTime.mins}
           label="mins"
           onChange={handleMins}
         >
@@ -72,7 +84,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="secs-label"
           id="secs"
-          value={secs}
+          value={finishTime.secs}
           label="secs"
           onChange={handleSecs}
         >
@@ -84,6 +96,7 @@ const FinishTimeSelectGroup = () => {
           ))}
         </Select>
       </FormControl>
+      <Button onClick={countSplits}>Count the pace!</Button>
     </>
   );
 };

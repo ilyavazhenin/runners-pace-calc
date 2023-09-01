@@ -1,15 +1,23 @@
-import DistanceSelect from "./components/DistanceSelect";
-import FinishTimeSelectGroup from "./components/FinishTimeSelect";
-import SplitsList from "./components/SplitsList";
+import { useReducer } from 'react';
+import { SplitsContext, reducer, initialState } from '../../Contexts';
+import DistanceSelect from './components/DistanceSelect';
+import FinishTimeSelectGroup from './components/FinishTimeSelect';
+import SplitsList from './components/SplitsList';
 
 const DistanceRunningPage = () => {
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state, 'STATE AFTER USE REDUCER');
+
   return (
     <>
-      <DistanceSelect />
-      <FinishTimeSelectGroup />
-      <SplitsList splits={[1, 2, 3]}/> 
+      <SplitsContext.Provider value={{ state, dispatch }}>
+        <DistanceSelect />
+        <FinishTimeSelectGroup />
+        <SplitsList />
+      </SplitsContext.Provider>
     </>
-  ); // TODO: put splits values from react context mb?
+  );
 };
 
 export default DistanceRunningPage;
