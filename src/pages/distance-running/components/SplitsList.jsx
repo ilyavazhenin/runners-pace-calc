@@ -7,7 +7,7 @@ const SplitsList = () => {
   return (
     <ul>
       {state?.splits?.length ? state.splits.map((split, index) => <li key={index}>{`${split}`}</li>) : null}
-    </ul> // using index as key in my situiation is OK coz the elemnts won't change
+    </ul> // using index as key in my case is OK coz the elemnts ot their order won't change
   );
 };
 

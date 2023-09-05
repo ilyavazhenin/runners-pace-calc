@@ -98,7 +98,7 @@ const FinishTimeSelectGroup = () => {
       </FormControl>
       <Button onClick={countSplits}>Count the pace!</Button>
     </>
-  );
+  ); //TODO: later - remove the click button from here to index
 };
 
 export default FinishTimeSelectGroup;

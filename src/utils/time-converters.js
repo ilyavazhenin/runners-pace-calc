@@ -86,4 +86,4 @@ const getEvenStringedSplitsArray = (pace, distance) => {
 // console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
 // console.log(getEvenStringedSplitsArray(somePace, 21.1), 'stringed array of pace');
 
-export { calcPaceTime, getEvenStringedSplitsArray };
+export { calcPaceTime, getEvenStringedSplitsArray, calcFinishTime };
