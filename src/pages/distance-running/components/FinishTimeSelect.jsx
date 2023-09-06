@@ -9,29 +9,33 @@ const FinishTimeSelectGroup = () => {
   const HOURS_TO_PICK_FROM = [...Array(24).keys()]; // TODO: move to utils later
   const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
 
-  const [finishTime, setFinishTime] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
+  // const [finishTime, setFinishTime] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
   
   const handleHours = (e) => {
-    setFinishTime({...finishTime, hrs: e.target.value});
+    const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };
+    dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
   const handleMins = (e) => {
-    setFinishTime({...finishTime, mins: e.target.value});
+    const calculatedFinishTime = { ...state.finishTime, mins: e.target.value };
+    dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const handleSecs = (e) => {
-    setFinishTime({...finishTime, secs: e.target.value});
+    const calculatedFinishTime = { ...state.finishTime, secs: e.target.value };
+    dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const countSplits = () => {
-    console.log(finishTime, 'finishTime in calculating');
-    const avgPace = calcPaceTime(state.distance, finishTime); //TODO: GET THE DISTANCE FROM STATE!
+    console.log(state.finishTime, 'finishTime in calculating');
+    const avgPace = calcPaceTime(state.distance, state.finishTime); //TODO: GET THE DISTANCE FROM STATE!
     console.log(avgPace, 'avgPace');
+    dispatch({ type: 'SET_AVGPACE', payload: avgPace });
     const splits = getEvenStringedSplitsArray(avgPace, state.distance);
     console.log(splits, 'COUNTED SPLITS');
     return dispatch({ type: 'GET_SPLITS', payload: splits });
   };
 
-  console.log(finishTime, 'finishTime');
+  console.log(state.finishTime, 'finishTime');
   return (
     <>
       <FormControl
@@ -42,7 +46,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="hours-label"
           id="hours"
-          value={finishTime.hrs}
+          value={state.finishTime.hrs}
           label="hours"
           onChange={handleHours}
         >
@@ -63,7 +67,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="mins-label"
           id="mins"
-          value={finishTime.mins}
+          value={state.finishTime.mins}
           label="mins"
           onChange={handleMins}
         >
@@ -84,7 +88,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="secs-label"
           id="secs"
-          value={finishTime.secs}
+          value={state.finishTime.secs}
           label="secs"
           onChange={handleSecs}
         >

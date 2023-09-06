@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputLabel, MenuItem, Select, FormControl, Button } from "@mui/material";
-import { calcFinishTime } from "../../../utils/time-converters";
+import { calcFinishTime, getEvenStringedSplitsArray } from "../../../utils/time-converters";
 import { SplitsContext } from "../../../Contexts";
 import { useContext } from "react";
 
@@ -23,6 +23,8 @@ const AvgPaceSelect = () => {
   const getFinishTime = () => {
     const finishTime = calcFinishTime(state.distance, state.avgPace); //TODO: later - get the pace from global state!
     console.log(finishTime, '!!!!finishTime if avgpace!!!');
+    const splits = getEvenStringedSplitsArray(state.avgPace, state.distance);
+    dispatch({ type: 'GET_SPLITS', payload: splits });
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
   };
 
