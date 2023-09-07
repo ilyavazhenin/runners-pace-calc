@@ -1,8 +1,17 @@
-import { useState } from "react";
-import { InputLabel, MenuItem, Select, FormControl, Button } from "@mui/material";
-import { calcPaceTime, getEvenStringedSplitsArray } from "../../../utils/time-converters";
-import { SplitsContext } from "../../../Contexts";
-import { useContext } from "react";
+import {
+  InputLabel,
+  MenuItem,
+  Select,
+  FormControl,
+  Button,
+  Stack,
+} from '@mui/material';
+import {
+  calcPaceTime,
+  getEvenStringedSplitsArray,
+} from '../../../utils/time-converters';
+import { SplitsContext } from '../../../Contexts';
+import { useContext } from 'react';
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);
@@ -10,7 +19,7 @@ const FinishTimeSelectGroup = () => {
   const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
 
   // const [finishTime, setFinishTime] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
-  
+
   const handleHours = (e) => {
     const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
@@ -37,10 +46,10 @@ const FinishTimeSelectGroup = () => {
 
   console.log(state.finishTime, 'finishTime');
   return (
-    <>
+    <Stack direction={'row'}>
       <FormControl
         size="large"
-        sx={{ m: 2, minWidth: 100 }}
+        sx={{ m: 1, minWidth: 80 }}
       >
         <InputLabel id="hours-label">Часов</InputLabel>
         <Select
@@ -59,10 +68,7 @@ const FinishTimeSelectGroup = () => {
         </Select>
       </FormControl>
 
-      <FormControl
-        size="large"
-        sx={{ m: 2, minWidth: 100 }}
-      >
+      <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
         <InputLabel id="mins-label">Минут</InputLabel>
         <Select
           labelId="mins-label"
@@ -80,10 +86,7 @@ const FinishTimeSelectGroup = () => {
         </Select>
       </FormControl>
 
-      <FormControl
-        size="large"
-        sx={{ m: 2, minWidth: 100 }}
-      >
+      <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
         <InputLabel id="secs-label">Секунд</InputLabel>
         <Select
           labelId="secs-label"
@@ -101,7 +104,7 @@ const FinishTimeSelectGroup = () => {
         </Select>
       </FormControl>
       <Button onClick={countSplits}>Count the pace!</Button>
-    </>
+    </Stack>
   ); //TODO: later - remove the click button from here to index
 };
 

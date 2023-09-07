@@ -11,7 +11,7 @@ const DistanceSelect = () => {
   return (
     <FormControl
       size="large"
-      sx={{ m: 2, minWidth: 220 }}
+      sx={{ m: 2, maxWidth: 120 }}
     >
       <InputLabel id="demo-simple-select-label">Дистанция</InputLabel>
       <Select

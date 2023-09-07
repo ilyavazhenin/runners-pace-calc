@@ -1,15 +1,22 @@
-import { useState } from "react";
-import { InputLabel, MenuItem, Select, FormControl, Button } from "@mui/material";
-import { calcFinishTime, getEvenStringedSplitsArray } from "../../../utils/time-converters";
-import { SplitsContext } from "../../../Contexts";
-import { useContext } from "react";
+import {
+  InputLabel,
+  MenuItem,
+  Select,
+  FormControl,
+  Button,
+  Stack,
+} from '@mui/material';
+import {
+  calcFinishTime,
+  getEvenStringedSplitsArray,
+} from '../../../utils/time-converters';
+import { SplitsContext } from '../../../Contexts';
+import { useContext } from 'react';
 
 const AvgPaceSelect = () => {
   const { state, dispatch } = useContext(SplitsContext);
   const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
 
-  // const [avgPace, setAvgPace] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
-  
   const handleMins = (e) => {
     const calculatableAvgPace = { ...state.avgPace, mins: e.target.value };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
@@ -28,13 +35,11 @@ const AvgPaceSelect = () => {
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
   };
 
-
   return (
-    <>
-
+    <Stack direction={'row'}>
       <FormControl
         size="large"
-        sx={{ m: 2, minWidth: 100 }}
+        sx={{ m: 1, minWidth: 80 }}
       >
         <InputLabel id="mins-label">Минут</InputLabel>
         <Select
@@ -55,7 +60,7 @@ const AvgPaceSelect = () => {
 
       <FormControl
         size="large"
-        sx={{ m: 2, minWidth: 100 }}
+        sx={{ m: 1, minWidth: 80 }}
       >
         <InputLabel id="secs-label">Секунд</InputLabel>
         <Select
@@ -74,7 +79,7 @@ const AvgPaceSelect = () => {
         </Select>
       </FormControl>
       <Button onClick={getFinishTime}>Count Finish Time!</Button>
-    </>
+    </Stack>
   );
 };
 
