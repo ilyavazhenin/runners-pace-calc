@@ -2,8 +2,17 @@ const MS_IN_SEC = 1000;
 const MS_IN_MIN = 60000;
 const MS_IN_HR = 3600000;
 
-const convertTimeToMs = (time) => time.hrs * MS_IN_HR + time.mins * MS_IN_MIN + time.secs * MS_IN_SEC + time.mss;
-const getTimeString = (time) => `${time.hrs ?? ''}:${time.mins ?? ''}:${time.secs ?? ''}:${time.mss ?? ''}`;
+const convertTimeToMs = (time) =>
+  time.hrs * MS_IN_HR +
+  time.mins * MS_IN_MIN +
+  time.secs * MS_IN_SEC +
+  time.mss;
+const getTimeString = ({ hrs, mins, secs }) => {
+  const hrsStr = hrs / 10 >= 1 ? `${hrs}` : `0${hrs}`;
+  const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
+  const secsStr = secs / 10 >= 1 ? `${secs}` : `0${secs}`;
+  return `${hrsStr ?? ''}:${minsStr ?? ''}:${secsStr ?? ''}`;
+};
 const getPaceString = ({ mins, secs }) => {
   const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
   const secsStr = secs / 10 >= 1 ? `${secs}` : `0${secs}`;
@@ -13,9 +22,9 @@ const getPaceString = ({ mins, secs }) => {
 const convertTimeToObj = (timeInMs) => {
   const hrs = Math.floor(timeInMs / MS_IN_HR);
   const mins = Math.floor((timeInMs % MS_IN_HR) / MS_IN_MIN);
-  const secs = Math.floor(((timeInMs % MS_IN_HR) % MS_IN_MIN) / MS_IN_SEC) 
+  const secs = Math.floor(((timeInMs % MS_IN_HR) % MS_IN_MIN) / MS_IN_SEC);
   const mss = Math.floor(timeInMs % 1000);
-  
+
   return {
     hrs,
     mins,
@@ -49,7 +58,7 @@ const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
 const parseTimeString = (timeString) => {
   const timeArray = timeString.split(':');
   if (timeArray.length === 2) {
-   timeArray.unshift('0');
+    timeArray.unshift('0');
   }
 
   const time = {
@@ -58,7 +67,7 @@ const parseTimeString = (timeString) => {
     secs: Number(timeArray[2]),
     mss: timeArray[3] ? Number(timeArray[3]) : 0,
   };
-  
+
   return time;
 };
 
@@ -78,6 +87,17 @@ const getEvenStringedSplitsArray = (pace, distance) => {
   return stringedArray;
 };
 
+const getSummaryTimesBySplit = (splitsArr) => {
+  let sum = 0;
+  const sumTimeBySplit = splitsArr.map((split) => {
+    // convert to MS and back to string
+    sum += convertTimeToMs(parseTimeString(split));
+    return getTimeString(convertTimeToObj(sum));
+  });
+
+  return sumTimeBySplit;
+};
+
 // console.log(convertTimeToMs(checkTime), 'time to ms');
 // console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
 // console.log(calcPaceTime(21.1, checkTime), 'pace');
@@ -86,4 +106,15 @@ const getEvenStringedSplitsArray = (pace, distance) => {
 // console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
 // console.log(getEvenStringedSplitsArray(somePace, 21.1), 'stringed array of pace');
 
-export { calcPaceTime, getEvenStringedSplitsArray, calcFinishTime };
+// const exampleArr = ['30:15', '30:15', '30:15', '30:15'];
+// console.log(getSummaryTimesBySplit(exampleArr), 'ARR');
+
+export {
+  calcPaceTime,
+  getEvenStringedSplitsArray,
+  calcFinishTime,
+  convertTimeToMs,
+  parseTimeString,
+  getTimeString,
+  convertTimeToObj,
+};

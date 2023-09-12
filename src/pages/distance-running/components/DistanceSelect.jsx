@@ -5,7 +5,8 @@ import { useContext } from 'react';
 const DistanceSelect = () => {
   const { state, dispatch } = useContext(SplitsContext);
   const handleChange = (e) => {
-    return dispatch({type: 'SET_DISTANCE', payload: e.target.value});
+    dispatch({type: 'SET_DISTANCE', payload: e.target.value});
+    dispatch({type: 'GET_SPLITS', payload: []}); // kind of an extra reducer
   };
 
   return (
