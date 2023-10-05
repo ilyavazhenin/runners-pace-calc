@@ -10,11 +10,11 @@ import {
   calcFinishTime,
   getEvenStringedSplitsArray,
 } from '../../../utils/time-converters';
-import { SplitsContext } from '../../../DistRunningContext';
+import { LapsContext } from '../../../TrackAndFieldContext';
 import { useContext } from 'react';
 
 const AvgPaceSelect = () => {
-  const { state, dispatch } = useContext(SplitsContext);
+  const { state, dispatch } = useContext(LapsContext);
   const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
 
   const handleMins = (e) => {

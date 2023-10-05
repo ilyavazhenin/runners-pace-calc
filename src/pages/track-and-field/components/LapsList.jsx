@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SplitsContext } from '../../../DistRunningContext';
+import { LapsContext } from '../../../TrackAndFieldContext';
 import {
   convertTimeToMs,
   parseTimeString,
@@ -7,8 +7,8 @@ import {
   convertTimeToObj,
 } from '../../../utils/time-converters';
 
-const SplitsList = () => {
-  const { state } = useContext(SplitsContext);
+const LapsList = () => {
+  const { state } = useContext(LapsContext);
   const lastSplitDistanceDiff = state.distance - Math.round(state.distance);
   const lastSplitDistance = lastSplitDistanceDiff > 0 ? lastSplitDistanceDiff.toFixed(1) : parseInt(state.distance);
   let timeSumBySplit = 0;
@@ -41,4 +41,4 @@ const SplitsList = () => {
   );
 };
 
-export default SplitsList;
+export default LapsList;

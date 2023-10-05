@@ -10,7 +10,7 @@ import {
   calcPaceTime,
   getEvenStringedSplitsArray,
 } from '../../../utils/time-converters';
-import { SplitsContext } from '../../../Contexts';
+import { SplitsContext } from '../../../DistRunningContext';
 import { useContext } from 'react';
 
 const FinishTimeSelectGroup = () => {

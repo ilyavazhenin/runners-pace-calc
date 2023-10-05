@@ -1,5 +1,5 @@
 import { InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { SplitsContext } from '../../../Contexts';
+import { SplitsContext } from '../../../DistRunningContext';
 import { useContext } from 'react';
 
 const DistanceSelect = () => {

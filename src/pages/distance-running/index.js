@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { SplitsContext, reducer, initialState } from '../../Contexts';
+import { SplitsContext, reducer, initialState } from '../../DistRunningContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
 import DistanceSelect from './components/DistanceSelect';
 import FinishTimeSelectGroup from './components/FinishTimeSelect';
