@@ -7,6 +7,7 @@ const convertTimeToMs = (time) =>
   time.mins * MS_IN_MIN +
   time.secs * MS_IN_SEC +
   time.mss;
+
 const getTimeString = ({ hrs, mins, secs }) => {
   const hrsStr = hrs / 10 >= 1 ? `${hrs}` : `0${hrs}`;
   const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
@@ -98,6 +99,36 @@ const getSummaryTimesBySplit = (splitsArr) => {
   return sumTimeBySplit;
 };
 
+const calcPacePerLap = (pace, lapLengthInMeters) => {
+  const lapsPer1000m = lapLengthInMeters === 200 ? 5 : 2.5;
+  const pacePerLap = convertTimeToMs(pace) / lapsPer1000m;
+  return convertTimeToObj(pacePerLap);
+};
+
+const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
+  const pacePerLap = calcPacePerLap(pace, lapLengthInMeters);
+  const pacePerLapString = getPaceString(pacePerLap);
+
+  const lapsAmount = Math.floor(distanceInMeters / lapLengthInMeters);
+  const pacesArray = [];
+  for (let i = 0; i <= lapsAmount; i += 1) {
+    pacesArray.push(pacePerLapString);
+  }
+  const isThereLastHalfLap =
+    distanceInMeters % lapLengthInMeters > 0 ? true : false;
+  if (isThereLastHalfLap) {
+    const pacePerLapInMs = convertTimeToMs(pacePerLap);
+    console.log(pacePerLapInMs, 'paceInMs');
+    const halfLapPaceInMs = Math.floor(pacePerLapInMs / 2);
+    console.log(halfLapPaceInMs, 'halfLapPaceInMs');
+    const halfLapPace = convertTimeToObj(halfLapPaceInMs);
+    console.log(halfLapPace, 'halfLapPace');
+    const halfLapPaceString = getPaceString(halfLapPace);
+    pacesArray.push(halfLapPaceString);
+  }
+  return pacesArray;
+};
+
 // console.log(convertTimeToMs(checkTime), 'time to ms');
 // console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
 // console.log(calcPaceTime(21.1, checkTime), 'pace');
@@ -108,6 +139,11 @@ const getSummaryTimesBySplit = (splitsArr) => {
 
 // const exampleArr = ['30:15', '30:15', '30:15', '30:15'];
 // console.log(getSummaryTimesBySplit(exampleArr), 'ARR');
+console.log(calcPacePerLap(somePace, 200));
+console.log(getPaceString(calcPacePerLap(somePace, 200)));
+console.log('arrays:');
+console.log(getPacePerLapArray(somePace, 200, 2000));
+console.log(getPacePerLapArray(somePace, 400, 3000));
 
 export {
   calcPaceTime,
@@ -117,4 +153,5 @@ export {
   parseTimeString,
   getTimeString,
   convertTimeToObj,
+  getPacePerLapArray,
 };

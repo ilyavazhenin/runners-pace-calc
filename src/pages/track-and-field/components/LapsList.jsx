@@ -17,7 +17,6 @@ const LapsList = () => {
     <ul style={{ listStyleType: 'none' }}>
       {state?.splits?.length
         ? state.splits.map((split, index) => {
-            // const [split, timeSumBySplit] = splitInfo;
             timeSumBySplit += convertTimeToMs(parseTimeString(split));
             const timeSumBySplitString = getTimeString(
               convertTimeToObj(timeSumBySplit)
