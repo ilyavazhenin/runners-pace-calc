@@ -9,30 +9,30 @@ import {
 
 const LapsList = () => {
   const { state } = useContext(LapsContext);
-  const lastSplitDistanceDiff = state.distance - Math.round(state.distance);
-  const lastSplitDistance = lastSplitDistanceDiff > 0 ? lastSplitDistanceDiff.toFixed(1) : parseInt(state.distance);
-  let timeSumBySplit = 0;
+  const lastLapDistance = state.distance;
+  let timeSumByLap = 0;
+  console.log(state, 'state')
 
   return (
     <ul style={{ listStyleType: 'none' }}>
-      {state?.splits?.length
-        ? state.splits.map((split, index) => {
-            timeSumBySplit += convertTimeToMs(parseTimeString(split));
-            const timeSumBySplitString = getTimeString(
-              convertTimeToObj(timeSumBySplit)
+      {state?.laps?.length
+        ? state.laps.map((lap, index) => {
+            timeSumByLap += convertTimeToMs(parseTimeString(lap));
+            const timeSumByLapString = getTimeString(
+              convertTimeToObj(timeSumByLap)
             );
-            const splitDistance = index + 1;
-            if (splitDistance === state.splits.length)
+            const currentDistance = state.lapDistance + state.lapDistance * index;
+            if (index === state.laps.length - 1)
               return (
                 <li
                   key={index}
-                >{`${lastSplitDistance}k – ${split} – ${timeSumBySplitString}`}</li>
+                >{`${lastLapDistance}k – ${lap} – ${timeSumByLapString}`}</li>
               );
             else
               return (
                 <li
                   key={index}
-                >{`${splitDistance}k – ${split} – ${timeSumBySplitString}`}</li>
+                >{`${currentDistance}m – ${lap} – ${timeSumByLapString}`}</li>
               );
           })
         : null}

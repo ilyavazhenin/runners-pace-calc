@@ -40,8 +40,14 @@ const calcPaceTime = (distInKm, timeObj) => {
   return convertTimeToObj(paceInMsPerKm);
 };
 
-const calcFinishTime = (distance, pace) => {
-  const finishTimeInMs = distance * convertTimeToMs(pace);
+const calcFinishTime = (distanceInKM, pace) => {
+  const finishTimeInMs = distanceInKM * convertTimeToMs(pace);
+  const finishTime = convertTimeToObj(finishTimeInMs);
+  return finishTime;
+};
+
+const calcFinishTimeTF = (distanceInMeters, pace) => {
+  const finishTimeInMs = (distanceInMeters / 1000) * convertTimeToMs(pace);
   const finishTime = convertTimeToObj(finishTimeInMs);
   return finishTime;
 };
@@ -106,17 +112,22 @@ const calcPacePerLap = (pace, lapLengthInMeters) => {
 };
 
 const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
+  console.log(lapLengthInMeters, distanceInMeters, 'lapLengthInMeters, distanceInMeters')
   const pacePerLap = calcPacePerLap(pace, lapLengthInMeters);
   const pacePerLapString = getPaceString(pacePerLap);
 
   const lapsAmount = Math.floor(distanceInMeters / lapLengthInMeters);
   const pacesArray = [];
-  for (let i = 0; i <= lapsAmount; i += 1) {
+
+  for (let i = 1; i <= lapsAmount; i += 1) {
     pacesArray.push(pacePerLapString);
   }
+
   const isThereLastHalfLap =
     distanceInMeters % lapLengthInMeters > 0 ? true : false;
+  
   if (isThereLastHalfLap) {
+    console.log(isThereLastHalfLap, 'isThereLastHalfLap');
     const pacePerLapInMs = convertTimeToMs(pacePerLap);
     console.log(pacePerLapInMs, 'paceInMs');
     const halfLapPaceInMs = Math.floor(pacePerLapInMs / 2);
@@ -126,6 +137,7 @@ const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
     const halfLapPaceString = getPaceString(halfLapPace);
     pacesArray.push(halfLapPaceString);
   }
+
   return pacesArray;
 };
 
@@ -139,11 +151,11 @@ const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
 
 // const exampleArr = ['30:15', '30:15', '30:15', '30:15'];
 // console.log(getSummaryTimesBySplit(exampleArr), 'ARR');
-console.log(calcPacePerLap(somePace, 200));
-console.log(getPaceString(calcPacePerLap(somePace, 200)));
-console.log('arrays:');
-console.log(getPacePerLapArray(somePace, 200, 2000));
-console.log(getPacePerLapArray(somePace, 400, 3000));
+// console.log(calcPacePerLap(somePace, 200));
+// console.log(getPaceString(calcPacePerLap(somePace, 200)));
+// console.log('arrays:');
+// console.log(getPacePerLapArray(somePace, 200, 2000));
+// console.log(getPacePerLapArray(somePace, 400, 3000));
 
 export {
   calcPaceTime,
@@ -154,4 +166,6 @@ export {
   getTimeString,
   convertTimeToObj,
   getPacePerLapArray,
+  calcPacePerLap,
+  calcFinishTimeTF,
 };

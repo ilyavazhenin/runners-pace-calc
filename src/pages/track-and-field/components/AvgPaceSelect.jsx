@@ -7,8 +7,9 @@ import {
   Stack,
 } from '@mui/material';
 import {
-  calcFinishTime,
-  getEvenStringedSplitsArray,
+  calcFinishTimeTF,
+  getPacePerLapArray,
+  calcPacePerLap,
 } from '../../../utils/time-converters';
 import { LapsContext } from '../../../TrackAndFieldContext';
 import { useContext } from 'react';
@@ -28,10 +29,10 @@ const AvgPaceSelect = () => {
   };
 
   const getFinishTime = () => {
-    const finishTime = calcFinishTime(state.distance, state.avgPace); //TODO: later - get the pace from global state!
-    console.log(finishTime, '!!!!finishTime if avgpace!!!');
-    const splits = getEvenStringedSplitsArray(state.avgPace, state.distance);
-    dispatch({ type: 'GET_SPLITS', payload: splits });
+    const finishTime = calcFinishTimeTF(state.distance, state.avgPace);
+    const laps = getPacePerLapArray(state.avgPace, state.lapDistance, state.distance);
+    console.log(laps, 'laps array!!!');
+    dispatch({ type: 'GET_LAPS', payload: laps });
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
   };
 
@@ -78,7 +79,7 @@ const AvgPaceSelect = () => {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={getFinishTime}>Count Finish Time!</Button>
+      <Button onClick={getFinishTime}>Рассчитать раскладку по кругам</Button>
     </Stack>
   );
 };
