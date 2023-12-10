@@ -46,6 +46,8 @@ const FinishTimeSelectGroup = () => {
 
   console.log(state.finishTime, 'finishTime');
   return (
+    <>
+    <h4>Выбери финишное время</h4>
     <Stack direction={'row'}>
       <FormControl
         size="large"
@@ -103,8 +105,10 @@ const FinishTimeSelectGroup = () => {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={countSplits}>Count the pace!</Button>
+      
     </Stack>
+    <Button variant="contained" onClick={countSplits}>Расчитать средний темп и раскладку</Button>
+    </>
   ); //TODO: later - remove the click button from here to index
 };
 

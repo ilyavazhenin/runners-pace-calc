@@ -1,6 +1,7 @@
 import { InputLabel, MenuItem, Select, FormControl } from '@mui/material';
 import { SplitsContext } from '../../../DistRunningContext';
 import { useContext } from 'react';
+import { ROAD_DISTANCES } from '../../../utils/constants';
 
 const DistanceSelect = () => {
   const { state, dispatch } = useContext(SplitsContext);
@@ -10,6 +11,8 @@ const DistanceSelect = () => {
   };
 
   return (
+    <>
+    <h4>Выбери дистанцию</h4>
     <FormControl
       size="large"
       sx={{ m: 2, maxWidth: 120 }}
@@ -22,12 +25,14 @@ const DistanceSelect = () => {
         label="Distance"
         onChange={handleChange}
       >
-        <MenuItem value={5}>5 км</MenuItem>
+        {ROAD_DISTANCES.map((dist) => <MenuItem value={dist}>{dist} км</MenuItem>)}
+        {/* <MenuItem value={5}>5 км</MenuItem>
         <MenuItem value={10}>10 км</MenuItem>
         <MenuItem value={21.1}>21,1 км</MenuItem>
-        <MenuItem value={42.2}>42,2 км</MenuItem>
+        <MenuItem value={42.2}>42,2 км</MenuItem> */}
       </Select>
     </FormControl>
+    </>
   );
 };
 

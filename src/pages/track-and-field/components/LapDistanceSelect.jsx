@@ -10,6 +10,8 @@ const LapDistanceSelect = () => {
   };
 
   return (
+    <>
+    <h4>Выбери длину круга</h4>
     <FormControl
       size="large"
       sx={{ m: 2, maxWidth: 120 }}
@@ -26,6 +28,8 @@ const LapDistanceSelect = () => {
         <MenuItem value={400}>400 м</MenuItem>
       </Select>
     </FormControl>
+    </>
+    
   );
 };
 

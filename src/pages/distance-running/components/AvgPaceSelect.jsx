@@ -36,6 +36,8 @@ const AvgPaceSelect = () => {
   };
 
   return (
+    <>
+    <h4>Или выбери целевой темп на км</h4>
     <Stack direction={'row'}>
       <FormControl
         size="large"
@@ -78,8 +80,11 @@ const AvgPaceSelect = () => {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={getFinishTime}>Count Finish Time!</Button>
+      
     </Stack>
+    <Button variant="contained" onClick={getFinishTime}>Рассчитать финишное время и раскладку</Button>
+    </>
+    
   );
 };
 

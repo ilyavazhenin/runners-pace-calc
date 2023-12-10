@@ -14,7 +14,7 @@ const SplitsList = () => {
   let timeSumBySplit = 0;
 
   return (
-    <ul style={{ listStyleType: 'none' }}>
+    <ul style={{ listStyleType: 'none', marginBottom: '60px' }}>
       {state?.splits?.length
         ? state.splits.map((split, index) => {
             // const [split, timeSumBySplit] = splitInfo;
