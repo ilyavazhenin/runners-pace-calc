@@ -75,7 +75,7 @@ const AvgPaceSelect = () => {
         </FormControl>
       </Stack>
       <Button variant="contained" onClick={getFinishTime}>
-        Рассчитать раскладку по кругам
+        Рассчитать время на круг и раскладку
       </Button>
     </>
   );

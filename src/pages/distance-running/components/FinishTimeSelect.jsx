@@ -12,11 +12,13 @@ import {
 } from '../../../utils/time-converters';
 import { SplitsContext } from '../../../context/DistRunningContext';
 import { useContext } from 'react';
-import { MINS_AND_SECS_TO_PICK_FROM, HOURS_TO_PICK_FROM } from '../../../utils/constants';
+import {
+  MINS_AND_SECS_TO_PICK_FROM,
+  HOURS_TO_PICK_FROM,
+} from '../../../utils/constants';
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);
-
 
   const handleHours = (e) => {
     const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };

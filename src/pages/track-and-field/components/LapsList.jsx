@@ -13,7 +13,7 @@ const LapsList = () => {
   let timeSumByLap = 0;
 
   return (
-    <ul style={{ listStyleType: 'none', marginBottom: '60px' }}>
+    <ul style={{ listStyleType: 'none', marginBottom: '65px' }}>
       {state?.laps?.length
         ? state.laps.map((lap, index) => {
             timeSumByLap += convertTimeToMs(parseTimeString(lap));

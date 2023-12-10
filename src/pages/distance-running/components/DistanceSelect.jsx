@@ -23,7 +23,9 @@ const DistanceSelect = () => {
           onChange={handleChange}
         >
           {ROAD_DISTANCES.map((dist) => (
-            <MenuItem key={dist} value={dist}>{dist} км</MenuItem>
+            <MenuItem key={dist} value={dist}>
+              {dist} км
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
