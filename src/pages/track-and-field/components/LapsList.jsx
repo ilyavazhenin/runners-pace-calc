@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { LapsContext } from '../../../TrackAndFieldContext';
+import { LapsContext } from '../../../context/TrackAndFieldContext';
 import {
   convertTimeToMs,
   parseTimeString,
@@ -11,7 +11,6 @@ const LapsList = () => {
   const { state } = useContext(LapsContext);
   const lastLapDistance = state.distance;
   let timeSumByLap = 0;
-  console.log(state, 'state')
 
   return (
     <ul style={{ listStyleType: 'none', marginBottom: '60px' }}>
@@ -21,7 +20,8 @@ const LapsList = () => {
             const timeSumByLapString = getTimeString(
               convertTimeToObj(timeSumByLap)
             );
-            const currentDistance = state.lapDistance + state.lapDistance * index;
+            const currentDistance =
+              state.lapDistance + state.lapDistance * index;
             if (index === state.laps.length - 1)
               return (
                 <li

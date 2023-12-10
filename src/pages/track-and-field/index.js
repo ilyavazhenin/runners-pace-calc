@@ -1,7 +1,11 @@
 import { useReducer } from 'react';
-import { LapsContext, reducer, initialState } from '../../TrackAndFieldContext';
+import {
+  LapsContext,
+  reducer,
+  initialState,
+} from '../../context/TrackAndFieldContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
-import FinishTimeSelectGroup from './components/FinishTimeSelect';
+// import FinishTimeSelectGroup from './components/FinishTimeSelect';
 import LapsList from './components/LapsList';
 import LapDistanceSelect from './components/LapDistanceSelect';
 import Stack from '@mui/material/Stack';

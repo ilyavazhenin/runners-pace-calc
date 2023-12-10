@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SplitsContext } from '../../../DistRunningContext';
+import { SplitsContext } from '../../../context/DistRunningContext';
 import {
   convertTimeToMs,
   parseTimeString,
@@ -10,7 +10,10 @@ import {
 const SplitsList = () => {
   const { state } = useContext(SplitsContext);
   const lastSplitDistanceDiff = state.distance - Math.round(state.distance);
-  const lastSplitDistance = lastSplitDistanceDiff > 0 ? lastSplitDistanceDiff.toFixed(1) : parseInt(state.distance);
+  const lastSplitDistance =
+    lastSplitDistanceDiff > 0
+      ? lastSplitDistanceDiff.toFixed(1)
+      : parseInt(state.distance);
   let timeSumBySplit = 0;
 
   return (

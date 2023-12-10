@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 export const Navigation = () => {
   const [value, setValue] = useState('/distancerun');
-  console.log(value);
   const navigate = useNavigate();
   
   return (

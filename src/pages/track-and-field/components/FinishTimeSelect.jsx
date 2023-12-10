@@ -7,19 +7,15 @@ import {
   Stack,
 } from '@mui/material';
 import {
-  calcPaceTime,
   getPacePerLapArray,
   calcPacePerLap,
 } from '../../../utils/time-converters';
-import { LapsContext } from '../../../TrackAndFieldContext';
+import { LapsContext } from '../../../context/TrackAndFieldContext';
 import { useContext } from 'react';
+import { MINS_AND_SECS_TO_PICK_FROM, HOURS_TO_PICK_FROM } from '../../../utils/constants';
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(LapsContext);
-  const HOURS_TO_PICK_FROM = [...Array(24).keys()]; // TODO: move to utils later
-  const MINS_AND_SECS_TO_PICK_FROM = [...Array(60).keys()]; // TODO: move to utils later
-
-  // const [finishTime, setFinishTime] = useState({ hrs: 0, mins: 0, secs: 0, mss: 0 });
 
   const handleHours = (e) => {
     const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };
@@ -36,22 +32,19 @@ const FinishTimeSelectGroup = () => {
   };
 
   const countLaps = () => {
-    console.log(state.finishTime, 'finishTime in calculating');
-    const pacePerLap = calcPacePerLap(state.avgPace, state.lapDistance); //TODO: GET THE DISTANCE FROM STATE!
-    console.log(pacePerLap, 'pacePerLap');
+    const pacePerLap = calcPacePerLap(state.avgPace, state.lapDistance);
     dispatch({ type: 'SET_PACE_PER_LAP', payload: pacePerLap });
-    const laps = getPacePerLapArray(pacePerLap, state.lapDistance, state.distance);
-    console.log(laps, 'COUNTED LAPS');
+    const laps = getPacePerLapArray(
+      pacePerLap,
+      state.lapDistance,
+      state.distance
+    );
     return dispatch({ type: 'GET_LAPS', payload: laps });
   };
 
-  console.log(state.finishTime, 'finishTime');
   return (
     <Stack direction={'row'}>
-      <FormControl
-        size="large"
-        sx={{ m: 1, minWidth: 80 }}
-      >
+      <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
         <InputLabel id="hours-label">Часов</InputLabel>
         <Select
           labelId="hours-label"
@@ -61,10 +54,7 @@ const FinishTimeSelectGroup = () => {
           onChange={handleHours}
         >
           {HOURS_TO_PICK_FROM.map((el) => (
-            <MenuItem
-              value={el}
-              key={el}
-            >{`${el}`}</MenuItem>
+            <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -79,10 +69,7 @@ const FinishTimeSelectGroup = () => {
           onChange={handleMins}
         >
           {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
-            <MenuItem
-              value={el}
-              key={el}
-            >{`${el}`}</MenuItem>
+            <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -97,10 +84,7 @@ const FinishTimeSelectGroup = () => {
           onChange={handleSecs}
         >
           {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
-            <MenuItem
-              value={el}
-              key={el}
-            >{`${el}`}</MenuItem>
+            <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
           ))}
         </Select>
       </FormControl>

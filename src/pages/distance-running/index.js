@@ -1,5 +1,9 @@
 import { useReducer } from 'react';
-import { SplitsContext, reducer, initialState } from '../../DistRunningContext';
+import {
+  SplitsContext,
+  reducer,
+  initialState,
+} from '../../context/DistRunningContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
 import DistanceSelect from './components/DistanceSelect';
 import FinishTimeSelectGroup from './components/FinishTimeSelect';
@@ -8,7 +12,6 @@ import Stack from '@mui/material/Stack';
 
 const DistanceRunningPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state, 'STATE AFTER USE REDUCER');
 
   return (
     <Stack

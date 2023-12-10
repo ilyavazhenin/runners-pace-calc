@@ -11,7 +11,7 @@ import {
   getPacePerLapArray,
   // calcPacePerLap,
 } from '../../../utils/time-converters';
-import { LapsContext } from '../../../TrackAndFieldContext';
+import { LapsContext } from '../../../context/TrackAndFieldContext';
 import { useContext } from 'react';
 import { MINS_AND_SECS_TO_PICK_FROM } from '../../../utils/constants';
 
@@ -35,7 +35,7 @@ const AvgPaceSelect = () => {
       state.lapDistance,
       state.distance
     );
-    console.log(laps, 'laps array!!!');
+
     dispatch({ type: 'GET_LAPS', payload: laps });
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
   };
@@ -74,7 +74,9 @@ const AvgPaceSelect = () => {
           </Select>
         </FormControl>
       </Stack>
-      <Button variant="contained" onClick={getFinishTime}>Рассчитать раскладку по кругам</Button>
+      <Button variant="contained" onClick={getFinishTime}>
+        Рассчитать раскладку по кругам
+      </Button>
     </>
   );
 };

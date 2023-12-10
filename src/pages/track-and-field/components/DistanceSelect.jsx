@@ -1,5 +1,5 @@
 import { InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { LapsContext } from '../../../TrackAndFieldContext';
+import { LapsContext } from '../../../context/TrackAndFieldContext';
 import { useContext } from 'react';
 import { TRACK_DISTANCES } from '../../../utils/constants';
 
@@ -23,7 +23,7 @@ const DistanceSelect = () => {
           onChange={handleChange}
         >
           {TRACK_DISTANCES.map((dist) => (
-            <MenuItem value={dist}>{dist} м</MenuItem>
+            <MenuItem key={dist} value={dist}>{dist} м</MenuItem>
           ))}
         </Select>
       </FormControl>
