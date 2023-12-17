@@ -5,6 +5,11 @@ const filesURLs = [
   'favicon.png',
   'styles.css',
   'document',
+  'distancerun',
+  'track',
+  'manifest.json',
+  'app-icon-new.png',
+  'app-icon-new192.png',
 ];
 
 const cacheFirstStrategy = async (request) => {
