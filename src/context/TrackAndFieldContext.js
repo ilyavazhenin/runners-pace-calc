@@ -5,21 +5,27 @@ export const LapsContext = createContext(null);
 export const reducer = (state, { type, payload }) => {
   switch (type) {
     case 'GET_LAPS':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, laps: payload }));
       return { ...state, laps: payload };
 
     case 'SET_AVGPACE':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, avgPace: payload }));
       return { ...state, avgPace: payload };
 
     case 'SET_FINISH_TIME':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, finishTime: payload }));
       return { ...state, finishTime: payload };
 
     case 'SET_DISTANCE':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, distance: payload }));
       return { ...state, distance: payload };
 
     case 'SET_LAP_DISTANCE':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, lapDistance: payload }));
       return { ...state, lapDistance: payload };
 
     case 'SET_PACE_PER_LAP':
+      sessionStorage.setItem('state', JSON.stringify({ ...state, pacePerLap: payload }));
         return { ...state, pacePerLap: payload };
 
     default:

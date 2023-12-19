@@ -9,9 +9,11 @@ import DistanceSelect from './components/DistanceSelect';
 import FinishTimeSelectGroup from './components/FinishTimeSelect';
 import SplitsList from './components/SplitsList';
 import Stack from '@mui/material/Stack';
+import { useActualState } from '../../hooks/useActualState';
 
 const DistanceRunningPage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const actualState = useActualState(initialState);
+  const [state, dispatch] = useReducer(reducer, actualState);
 
   return (
     <Stack

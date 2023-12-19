@@ -10,9 +10,11 @@ import LapsList from './components/LapsList';
 import LapDistanceSelect from './components/LapDistanceSelect';
 import Stack from '@mui/material/Stack';
 import DistanceSelect from './components/DistanceSelect';
+import { useActualState } from '../../hooks/useActualState';
 
 const TrackAndFieldPage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const actualState = useActualState(initialState);
+  const [state, dispatch] = useReducer(reducer, actualState);
 
   return (
     <Stack
