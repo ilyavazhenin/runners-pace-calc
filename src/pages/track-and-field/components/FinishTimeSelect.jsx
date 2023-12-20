@@ -12,33 +12,33 @@ import {
 } from '../../../utils/time-converters';
 import { LapsContext } from '../../../context/TrackAndFieldContext';
 import { useContext } from 'react';
-import { MINS_AND_SECS_TO_PICK_FROM, HOURS_TO_PICK_FROM } from '../../../utils/constants';
+import {
+  MINS_AND_SECS_TO_PICK_FROM,
+  HOURS_TO_PICK_FROM,
+} from '../../../utils/constants';
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(LapsContext);
+  const { trackFinishTime, trackAvgPace, lapDistance, trackDistance } = state;
 
   const handleHours = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };
+    const calculatedFinishTime = { ...trackFinishTime, hrs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime }); //TODO: make one dispatch, not many
   };
   const handleMins = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, mins: e.target.value };
+    const calculatedFinishTime = { ...trackFinishTime, mins: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const handleSecs = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, secs: e.target.value };
+    const calculatedFinishTime = { ...trackFinishTime, secs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const countLaps = () => {
-    const pacePerLap = calcPacePerLap(state.avgPace, state.lapDistance);
+    const pacePerLap = calcPacePerLap(trackAvgPace, lapDistance);
     dispatch({ type: 'SET_PACE_PER_LAP', payload: pacePerLap });
-    const laps = getPacePerLapArray(
-      pacePerLap,
-      state.lapDistance,
-      state.distance
-    );
+    const laps = getPacePerLapArray(pacePerLap, lapDistance, trackDistance);
     return dispatch({ type: 'GET_LAPS', payload: laps });
   };
 
@@ -49,7 +49,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="hours-label"
           id="hours"
-          value={state.finishTime.hrs}
+          value={trackFinishTime.hrs}
           label="hours"
           onChange={handleHours}
         >
@@ -64,7 +64,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="mins-label"
           id="mins"
-          value={state.finishTime.mins}
+          value={trackFinishTime.mins}
           label="mins"
           onChange={handleMins}
         >
@@ -79,7 +79,7 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="secs-label"
           id="secs"
-          value={state.finishTime.secs}
+          value={trackFinishTime.secs}
           label="secs"
           onChange={handleSecs}
         >

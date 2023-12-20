@@ -18,12 +18,14 @@ const DistanceSelect = () => {
         <Select
           labelId="distance-select-label"
           id="distance-select"
-          value={state.distance}
+          value={state.trackDistance}
           label="Distance"
           onChange={handleChange}
         >
           {TRACK_DISTANCES.map((dist) => (
-            <MenuItem key={dist} value={dist}>{dist} м</MenuItem>
+            <MenuItem key={dist} value={dist}>
+              {dist} м
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

@@ -9,7 +9,8 @@ import {
 
 const LapsList = () => {
   const { state } = useContext(LapsContext);
-  const lastLapDistance = state.distance;
+  const { trackDistance, lapDistance } = state;
+  const lastLapDistance = trackDistance;
   let timeSumByLap = 0;
 
   return (
@@ -20,8 +21,7 @@ const LapsList = () => {
             const timeSumByLapString = getTimeString(
               convertTimeToObj(timeSumByLap)
             );
-            const currentDistance =
-              state.lapDistance + state.lapDistance * index;
+            const currentDistance = lapDistance + lapDistance * index;
             if (index === state.laps.length - 1)
               return (
                 <li

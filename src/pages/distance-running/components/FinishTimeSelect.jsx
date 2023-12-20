@@ -19,25 +19,26 @@ import {
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);
+  const { roadFinishTime, roadDistance } = state;
 
   const handleHours = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, hrs: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, hrs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
   const handleMins = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, mins: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, mins: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const handleSecs = (e) => {
-    const calculatedFinishTime = { ...state.finishTime, secs: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, secs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const countSplits = () => {
-    const avgPace = calcPaceTime(state.distance, state.finishTime);
+    const avgPace = calcPaceTime(roadDistance, roadFinishTime);
     dispatch({ type: 'SET_AVGPACE', payload: avgPace });
-    const splits = getEvenStringedSplitsArray(avgPace, state.distance);
+    const splits = getEvenStringedSplitsArray(avgPace, roadDistance);
     return dispatch({ type: 'GET_SPLITS', payload: splits });
   };
 
@@ -50,7 +51,7 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="hours-label"
             id="hours"
-            value={state.finishTime.hrs}
+            value={roadFinishTime.hrs}
             label="hours"
             onChange={handleHours}
           >
@@ -65,7 +66,7 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="mins-label"
             id="mins"
-            value={state.finishTime.mins}
+            value={roadFinishTime.mins}
             label="mins"
             onChange={handleMins}
           >
@@ -80,7 +81,7 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="secs-label"
             id="secs"
-            value={state.finishTime.secs}
+            value={roadFinishTime.secs}
             label="secs"
             onChange={handleSecs}
           >

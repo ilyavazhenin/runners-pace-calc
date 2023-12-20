@@ -9,11 +9,13 @@ import {
 
 const SplitsList = () => {
   const { state } = useContext(SplitsContext);
-  const lastSplitDistanceDiff = state.distance - Math.round(state.distance);
+  const { roadDistance } = state;
+
+  const lastSplitDistanceDiff = roadDistance - Math.round(roadDistance);
   const lastSplitDistance =
     lastSplitDistanceDiff > 0
       ? lastSplitDistanceDiff.toFixed(1)
-      : parseInt(state.distance);
+      : parseInt(roadDistance);
   let timeSumBySplit = 0;
 
   return (

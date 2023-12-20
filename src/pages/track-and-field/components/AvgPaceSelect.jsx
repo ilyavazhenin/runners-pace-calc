@@ -17,24 +17,21 @@ import { MINS_AND_SECS_TO_PICK_FROM } from '../../../utils/constants';
 
 const AvgPaceSelect = () => {
   const { state, dispatch } = useContext(LapsContext);
+  const { trackAvgPace, lapDistance, trackDistance } = state;
 
   const handleMins = (e) => {
-    const calculatableAvgPace = { ...state.avgPace, mins: e.target.value };
+    const calculatableAvgPace = { ...trackAvgPace, mins: e.target.value };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
   const handleSecs = (e) => {
-    const calculatableAvgPace = { ...state.avgPace, secs: e.target.value };
+    const calculatableAvgPace = { ...trackAvgPace, secs: e.target.value };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
   const getFinishTime = () => {
-    const finishTime = calcFinishTimeTF(state.distance, state.avgPace);
-    const laps = getPacePerLapArray(
-      state.avgPace,
-      state.lapDistance,
-      state.distance
-    );
+    const finishTime = calcFinishTimeTF(trackDistance, trackAvgPace);
+    const laps = getPacePerLapArray(trackAvgPace, lapDistance, trackDistance);
 
     dispatch({ type: 'GET_LAPS', payload: laps });
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
@@ -49,7 +46,7 @@ const AvgPaceSelect = () => {
           <Select
             labelId="mins-label"
             id="mins"
-            value={state.avgPace.mins}
+            value={trackAvgPace.mins}
             label="mins"
             onChange={handleMins}
           >
@@ -64,7 +61,7 @@ const AvgPaceSelect = () => {
           <Select
             labelId="secs-label"
             id="secs"
-            value={state.avgPace.secs}
+            value={trackAvgPace.secs}
             label="secs"
             onChange={handleSecs}
           >

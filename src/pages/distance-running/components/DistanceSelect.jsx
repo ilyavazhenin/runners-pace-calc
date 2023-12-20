@@ -18,7 +18,7 @@ const DistanceSelect = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={state.distance}
+          value={state.roadDistance}
           label="Distance"
           onChange={handleChange}
         >

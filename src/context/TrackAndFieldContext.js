@@ -9,16 +9,16 @@ export const reducer = (state, { type, payload }) => {
       return { ...state, laps: payload };
 
     case 'SET_AVGPACE':
-      sessionStorage.setItem('state', JSON.stringify({ ...state, avgPace: payload }));
-      return { ...state, avgPace: payload };
+      sessionStorage.setItem('state', JSON.stringify({ ...state, trackAvgPace: payload }));
+      return { ...state, trackAvgPace: payload };
 
     case 'SET_FINISH_TIME':
-      sessionStorage.setItem('state', JSON.stringify({ ...state, finishTime: payload }));
-      return { ...state, finishTime: payload };
+      sessionStorage.setItem('state', JSON.stringify({ ...state, trackFinishTime: payload }));
+      return { ...state, trackFinishTime: payload };
 
     case 'SET_DISTANCE':
-      sessionStorage.setItem('state', JSON.stringify({ ...state, distance: payload }));
-      return { ...state, distance: payload };
+      sessionStorage.setItem('state', JSON.stringify({ ...state, trackDistance: payload }));
+      return { ...state, trackDistance: payload };
 
     case 'SET_LAP_DISTANCE':
       sessionStorage.setItem('state', JSON.stringify({ ...state, lapDistance: payload }));
@@ -35,10 +35,10 @@ export const reducer = (state, { type, payload }) => {
 
 export const initialState = {
   laps: [],
-  distance: 1000,
+  trackDistance: 1000,
   lapDistance: 200,
   pacePerLap: { hrs: 0, mins: 0, secs: 0, mss: 0 },
-  finishTime: { hrs: 0, mins: 0, secs: 0, mss: 0 },
-  avgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
+  trackFinishTime: { hrs: 0, mins: 0, secs: 0, mss: 0 },
+  trackAvgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
 };
 
