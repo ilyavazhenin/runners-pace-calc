@@ -20,7 +20,6 @@ const cacheFirstStrategy = async (request) => {
 self.addEventListener('install', async (e) => {
   const cache = await caches.open(appCache);
   await cache.addAll(filesURLs);
-  console.log('[SW]: Installed and cached');
 });
 
 self.addEventListener('activate', async (e) => {
@@ -30,8 +29,6 @@ self.addEventListener('activate', async (e) => {
       .filter((name) => name !== appCache)
       .map((name) => caches.delete(name))
   );
-
-  console.log('[SW]: Activated');
 });
 
 self.addEventListener('fetch', (e) => {

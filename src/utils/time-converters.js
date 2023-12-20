@@ -52,15 +52,16 @@ const calcFinishTimeTF = (distanceInMeters, pace) => {
   return finishTime;
 };
 
-// for tests, gonna remove later
-const checkTime = {
-  hrs: 1,
-  mins: 27,
-  secs: 40,
-  mss: 323,
-};
+// for tests, gonna remove later:
 
-const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
+// const checkTime = {
+//   hrs: 1,
+//   mins: 27,
+//   secs: 40,
+//   mss: 323,
+// };
+
+// const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
 
 const parseTimeString = (timeString) => {
   const timeArray = timeString.split(':');
@@ -94,16 +95,18 @@ const getEvenStringedSplitsArray = (pace, distance) => {
   return stringedArray;
 };
 
-const getSummaryTimesBySplit = (splitsArr) => {
-  let sum = 0;
-  const sumTimeBySplit = splitsArr.map((split) => {
-    // convert to MS and back to string
-    sum += convertTimeToMs(parseTimeString(split));
-    return getTimeString(convertTimeToObj(sum));
-  });
+// deprecated func:
 
-  return sumTimeBySplit;
-};
+// const getSummaryTimesBySplit = (splitsArr) => {
+//   let sum = 0;
+//   const sumTimeBySplit = splitsArr.map((split) => {
+//     // convert to MS and back to string
+//     sum += convertTimeToMs(parseTimeString(split));
+//     return getTimeString(convertTimeToObj(sum));
+//   });
+
+//   return sumTimeBySplit;
+// };
 
 const calcPacePerLap = (pace, lapLengthInMeters) => {
   const lapsPer1000m = lapLengthInMeters === 200 ? 5 : 2.5;
@@ -112,7 +115,6 @@ const calcPacePerLap = (pace, lapLengthInMeters) => {
 };
 
 const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
-  console.log(lapLengthInMeters, distanceInMeters, 'lapLengthInMeters, distanceInMeters')
   const pacePerLap = calcPacePerLap(pace, lapLengthInMeters);
   const pacePerLapString = getPaceString(pacePerLap);
 
@@ -127,13 +129,9 @@ const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
     distanceInMeters % lapLengthInMeters > 0 ? true : false;
   
   if (isThereLastHalfLap) {
-    console.log(isThereLastHalfLap, 'isThereLastHalfLap');
     const pacePerLapInMs = convertTimeToMs(pacePerLap);
-    console.log(pacePerLapInMs, 'paceInMs');
     const halfLapPaceInMs = Math.floor(pacePerLapInMs / 2);
-    console.log(halfLapPaceInMs, 'halfLapPaceInMs');
     const halfLapPace = convertTimeToObj(halfLapPaceInMs);
-    console.log(halfLapPace, 'halfLapPace');
     const halfLapPaceString = getPaceString(halfLapPace);
     pacesArray.push(halfLapPaceString);
   }
