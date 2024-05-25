@@ -9,7 +9,7 @@ It's a PWA app that works even offline! So you can install to your phone desktop
 * React
 * React Context api
 * React Router
-* CRA (just got used to it, i know Vite is better, will use it next time)
+* Vite (was Webpack recently, but it's time to move on)
 * React Router
 * MUI
 * Service Workers for PWA and offline work
@@ -25,6 +25,6 @@ It's a PWA app that works even offline! So you can install to your phone desktop
 ### How to play around as a dev
 
 ```
-npm-start
+npm start
 ```
 
