@@ -5,7 +5,7 @@ import TrackAndFieldPage from './pages/track-and-field';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-  global.window.addEventListener('load', async () => {
+  window.addEventListener('load', async () => {
     try {
       if ('serviceWorker' in navigator) {
         await navigator.serviceWorker.register('/sw.js');
