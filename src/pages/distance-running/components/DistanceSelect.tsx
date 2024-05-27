@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import { ROAD_DISTANCES } from '../../../utils/constants';
 
 const DistanceSelect = () => {
-  const { state, dispatch } = useContext(SplitsContext);
-  const handleChange = (e) => {
+  const { state, dispatch }: { state: any, dispatch: any} = useContext(SplitsContext);
+  const handleChange = (e: any) => {
     dispatch({ type: 'SET_DISTANCE', payload: e.target.value });
     dispatch({ type: 'GET_SPLITS', payload: [] }); // kind of an extra reducer
   };
@@ -13,7 +13,7 @@ const DistanceSelect = () => {
   return (
     <>
       <h4>Выбери дистанцию</h4>
-      <FormControl size="large" sx={{ m: 2, maxWidth: 120 }}>
+      <FormControl size="medium" sx={{ m: 2, maxWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">Дистанция</InputLabel>
         <Select
           labelId="demo-simple-select-label"
