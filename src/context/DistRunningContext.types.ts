@@ -1,3 +1,5 @@
+import { ITime } from "../shared_types/types";
+
 declare enum EDistRunningActions {
   GetSplits = 'GET_SPLITS',
   SetFinishTime = 'SET_FINISH_TIME',
@@ -5,7 +7,7 @@ declare enum EDistRunningActions {
   SetAvgPace = 'SET_AVGPACE',
 }
 
-interface IDistanceRunningState {
+export interface IDistanceRunningState {
   splits: string[];
   roadDistance: number;
   roadFinishTime: ITime;
@@ -32,4 +34,4 @@ interface ISetAvgPace {
   payload: ITime;
 }
 
-type Actions = ISetAvgPace | ISetDist | ISetFinishTime | IGetSplits;
+export type DistRunningActions = ISetAvgPace | ISetDist | ISetFinishTime | IGetSplits;

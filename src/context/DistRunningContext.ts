@@ -1,10 +1,11 @@
 import { createContext } from 'react';
+import { DistRunningActions, IDistanceRunningState } from './DistRunningContext.types';
 
 export const SplitsContext = createContext(null);
 
 export const reducer = (
   state: IDistanceRunningState,
-  { type, payload }: Actions
+  { type, payload }: DistRunningActions
 ): IDistanceRunningState => {
   switch (type) {
     case 'GET_SPLITS':

@@ -17,14 +17,6 @@ declare enum ETrackAndFieldActions {
   SetLapDist = 'SET_LAP_DISTANCE',
   SetPacePerLap = 'SET_PACE_PER_LAP',
 }
-
-export interface IDistanceRunningState {
-  splits: string[];
-  roadDistance: number;
-  roadFinishTime: ITime;
-  roadAvgPace: ITime;
-}
-
 interface IGetLaps {
   type: ETrackAndFieldActions.GetLaps;
   payload: string[];
@@ -55,10 +47,11 @@ interface ISetAvgPace {
   payload: ITime;
 }
 
-type TrackAndFieldActions =
+export type TrackAndFieldActions =
   | ISetAvgPace
   | ISetDist
   | ISetFinishTime
   | IGetLaps
   | ISetLapDist
   | ISetPacePerLap;
+  

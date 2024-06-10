@@ -1,6 +1,5 @@
 import { createContext } from 'react';
-
-import { ITrackAndFieldState, TrackAndFieldActions } from './TrackAndFieldContextTypes'
+import { ITrackAndFieldState, TrackAndFieldActions } from './TrackAndFieldContext.types'
 
 export const LapsContext = createContext(null);
 
