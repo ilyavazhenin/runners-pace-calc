@@ -1,7 +1,15 @@
 import { createContext } from 'react';
 import { DistRunningActions, IDistanceRunningState } from './DistRunningContext.types';
+import { ISplitsContext } from './DistRunningContext.types';
 
-export const SplitsContext = createContext(null);
+export const initialState: IDistanceRunningState = {
+  splits: [],
+  roadDistance: 21.1,
+  roadFinishTime: { hrs: 0, mins: 0, secs: 0, mss: 0 },
+  roadAvgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
+};
+
+export const SplitsContext = createContext<ISplitsContext | null>(null);
 
 export const reducer = (
   state: IDistanceRunningState,
@@ -39,11 +47,4 @@ export const reducer = (
     default:
       throw new Error('smth went wrong in reducer');
   }
-};
-
-export const initialState: IDistanceRunningState = {
-  splits: [],
-  roadDistance: 21.1,
-  roadFinishTime: { hrs: 0, mins: 0, secs: 0, mss: 0 },
-  roadAvgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
 };

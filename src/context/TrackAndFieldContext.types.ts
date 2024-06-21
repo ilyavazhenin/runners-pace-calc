@@ -9,41 +9,33 @@ export interface ITrackAndFieldState {
   trackAvgPace: ITime;
 }
 
-declare enum ETrackAndFieldActions {
-  GetLaps = 'GET_LAPS',
-  SetFinishTime = 'SET_FINISH_TIME',
-  SetDist = 'SET_DISTANCE',
-  SetAvgPace = 'SET_AVGPACE',
-  SetLapDist = 'SET_LAP_DISTANCE',
-  SetPacePerLap = 'SET_PACE_PER_LAP',
-}
 interface IGetLaps {
-  type: ETrackAndFieldActions.GetLaps;
+  type: 'GET_LAPS';
   payload: string[];
 }
 
 interface ISetLapDist {
-  type: ETrackAndFieldActions.SetLapDist;
+  type: 'SET_LAP_DISTANCE';
   payload: number;
 }
 
 interface ISetPacePerLap {
-  type: ETrackAndFieldActions.SetPacePerLap;
+  type: 'SET_PACE_PER_LAP';
   payload: ITime;
 }
 
 interface ISetFinishTime {
-  type: ETrackAndFieldActions.SetFinishTime;
+  type: 'SET_FINISH_TIME';
   payload: ITime;
 }
 
 interface ISetDist {
-  type: ETrackAndFieldActions.SetDist;
+  type: 'SET_DISTANCE';
   payload: number;
 }
 
 interface ISetAvgPace {
-  type: ETrackAndFieldActions.SetAvgPace;
+  type: 'SET_AVGPACE';
   payload: ITime;
 }
 

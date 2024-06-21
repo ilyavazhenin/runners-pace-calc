@@ -1,12 +1,5 @@
 import { ITime } from "../shared_types/types";
 
-declare enum EDistRunningActions {
-  GetSplits = 'GET_SPLITS',
-  SetFinishTime = 'SET_FINISH_TIME',
-  SetDist = 'SET_DISTANCE',
-  SetAvgPace = 'SET_AVGPACE',
-}
-
 export interface IDistanceRunningState {
   splits: string[];
   roadDistance: number;
@@ -14,23 +7,28 @@ export interface IDistanceRunningState {
   roadAvgPace: ITime;
 }
 
+export interface ISplitsContext {
+  state: IDistanceRunningState;
+  dispatch: React.Dispatch<DistRunningActions>;
+}
+
 interface IGetSplits {
-  type: EDistRunningActions.GetSplits;
+  type: 'GET_SPLITS';
   payload: string[];
 }
 
 interface ISetFinishTime {
-  type: EDistRunningActions.SetFinishTime;
+  type: 'SET_FINISH_TIME';
   payload: ITime;
 }
 
 interface ISetDist {
-  type: EDistRunningActions.SetDist;
+  type: 'SET_DISTANCE';
   payload: number;
 }
 
 interface ISetAvgPace {
-  type: EDistRunningActions.SetAvgPace;
+  type: 'SET_AVGPACE';
   payload: ITime;
 }
 
