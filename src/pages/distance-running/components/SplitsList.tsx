@@ -15,14 +15,14 @@ const SplitsList = () => {
   const lastSplitDistance =
     lastSplitDistanceDiff > 0
       ? lastSplitDistanceDiff.toFixed(1)
-      : parseInt(roadDistance);
+      : Number(roadDistance);
+  
   let timeSumBySplit = 0;
 
   return (
     <ul style={{ listStyleType: 'none', marginBottom: '65px' }}>
       {state?.splits?.length
         ? state.splits.map((split, index) => {
-            // const [split, timeSumBySplit] = splitInfo;
             timeSumBySplit += convertTimeToMs(parseTimeString(split));
             const timeSumBySplitString = getTimeString(
               convertTimeToObj(timeSumBySplit)
@@ -31,7 +31,7 @@ const SplitsList = () => {
             if (splitDistance === state.splits.length)
               return (
                 <li
-                  key={index}
+                  key={index} // using index as key in is OK here bc the order won't change
                 >{`${lastSplitDistance}k – ${split} – ${timeSumBySplitString}`}</li>
               );
             else
@@ -42,7 +42,7 @@ const SplitsList = () => {
               );
           })
         : null}
-    </ul> // using index as key in my case is OK coz the elemnts ot their order won't change
+    </ul>
   );
 };
 

@@ -9,7 +9,7 @@ export const initialState: IDistanceRunningState = {
   roadAvgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
 };
 
-export const SplitsContext = createContext<ISplitsContext | null>(null);
+export const SplitsContext = createContext<ISplitsContext>({} as ISplitsContext);
 
 export const reducer = (
   state: IDistanceRunningState,

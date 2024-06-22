@@ -17,20 +17,22 @@ import {
   HOURS_TO_PICK_FROM,
 } from '../../../utils/constants';
 
+import { ChangeTimeType } from '../../../shared_types/types';
+
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);
   const { roadFinishTime, roadDistance } = state;
 
-  const handleHours = (e) => {
+  const handleHours = (e: ChangeTimeType) => {
     const calculatedFinishTime = { ...roadFinishTime, hrs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
-  const handleMins = (e) => {
+  const handleMins = (e: ChangeTimeType) => {
     const calculatedFinishTime = { ...roadFinishTime, mins: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
-  const handleSecs = (e) => {
+  const handleSecs = (e: ChangeTimeType) => {
     const calculatedFinishTime = { ...roadFinishTime, secs: e.target.value };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
@@ -46,14 +48,14 @@ const FinishTimeSelectGroup = () => {
     <>
       <h4>Выбери финишное время</h4>
       <Stack direction={'row'}>
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="hours-label">Часов</InputLabel>
           <Select
             labelId="hours-label"
             id="hours"
             value={roadFinishTime.hrs}
             label="hours"
-            onChange={handleHours}
+            onChange={handleHours as any} // MUI Select bug typization! Had to switch TS off here 
           >
             {HOURS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -61,14 +63,14 @@ const FinishTimeSelectGroup = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="mins-label">Минут</InputLabel>
           <Select
             labelId="mins-label"
             id="mins"
             value={roadFinishTime.mins}
             label="mins"
-            onChange={handleMins}
+            onChange={handleMins as any} // MUI Select bug typization! Had to switch TS off here 
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -76,14 +78,14 @@ const FinishTimeSelectGroup = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="secs-label">Секунд</InputLabel>
           <Select
             labelId="secs-label"
             id="secs"
             value={roadFinishTime.secs}
             label="secs"
-            onChange={handleSecs}
+            onChange={handleSecs as any} // MUI Select bug typization! Had to switch TS off here 
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
