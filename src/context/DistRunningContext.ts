@@ -1,6 +1,11 @@
 import { createContext } from 'react';
-import { DistRunningActions, IDistanceRunningState } from './DistRunningContext.types';
-import { ISplitsContext } from './DistRunningContext.types';
+import {
+  DistRunningActions,
+  IDistanceRunningState,
+  ISplitsContext,
+} from './DistRunningContext.types';
+
+export const SplitsContext = createContext<ISplitsContext>({} as ISplitsContext);
 
 export const initialState: IDistanceRunningState = {
   splits: [],
@@ -8,8 +13,6 @@ export const initialState: IDistanceRunningState = {
   roadFinishTime: { hrs: 0, mins: 0, secs: 0, mss: 0 },
   roadAvgPace: { hrs: 0, mins: 0, secs: 0, mss: 0 },
 };
-
-export const SplitsContext = createContext<ISplitsContext>({} as ISplitsContext);
 
 export const reducer = (
   state: IDistanceRunningState,

@@ -14,17 +14,18 @@ import {
 import { LapsContext } from '../../../context/TrackAndFieldContext';
 import { useContext } from 'react';
 import { MINS_AND_SECS_TO_PICK_FROM } from '../../../utils/constants';
+import { ChangeTimeType } from '../../../shared_types/types';
 
 const AvgPaceSelect = () => {
   const { state, dispatch } = useContext(LapsContext);
   const { trackAvgPace, lapDistance, trackDistance } = state;
 
-  const handleMins = (e) => {
+  const handleMins = (e: ChangeTimeType) => {
     const calculatableAvgPace = { ...trackAvgPace, mins: e.target.value };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
-  const handleSecs = (e) => {
+  const handleSecs = (e: ChangeTimeType) => {
     const calculatableAvgPace = { ...trackAvgPace, secs: e.target.value };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
@@ -41,14 +42,14 @@ const AvgPaceSelect = () => {
     <>
       <h4>Выбери целевой темп на км</h4>
       <Stack direction={'row'}>
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="mins-label">Минут</InputLabel>
           <Select
             labelId="mins-label"
             id="mins"
             value={trackAvgPace.mins}
             label="mins"
-            onChange={handleMins}
+            onChange={handleMins as any} // MUI Select bug typization! Had to switch TS off here 
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -56,14 +57,14 @@ const AvgPaceSelect = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="secs-label">Секунд</InputLabel>
           <Select
             labelId="secs-label"
             id="secs"
             value={trackAvgPace.secs}
             label="secs"
-            onChange={handleSecs}
+            onChange={handleSecs as any}  // MUI Select bug typization! Had to switch TS off here 
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>

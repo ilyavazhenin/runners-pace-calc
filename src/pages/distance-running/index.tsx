@@ -10,11 +10,10 @@ import FinishTimeSelectGroup from './components/FinishTimeSelect';
 import SplitsList from './components/SplitsList';
 import Stack from '@mui/material/Stack';
 import { useActualState } from '../../hooks/useActualState';
-import { DistRunningActions, IDistanceRunningState } from '../../context/DistRunningContext.types';
 
 const DistanceRunningPage = () => {
   const actualState = useActualState(initialState);
-  const [state, dispatch] = useReducer(reducer as React.Reducer<IDistanceRunningState, DistRunningActions>, actualState);
+  const [state, dispatch] = useReducer(reducer, actualState);
 
   return (
     <Stack

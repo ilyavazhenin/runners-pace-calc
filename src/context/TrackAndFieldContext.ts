@@ -1,7 +1,11 @@
 import { createContext } from 'react';
-import { ITrackAndFieldState, TrackAndFieldActions } from './TrackAndFieldContext.types'
+import {
+  ILapsContext,
+  ITrackAndFieldState,
+  TrackAndFieldActions,
+} from './TrackAndFieldContext.types';
 
-export const LapsContext = createContext(null);
+export const LapsContext = createContext<ILapsContext>({} as ILapsContext);
 
 export const reducer = (
   state: ITrackAndFieldState,

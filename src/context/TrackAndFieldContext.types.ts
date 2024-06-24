@@ -1,12 +1,17 @@
-import { ITime } from '../shared_types/types' 
+import { ITime } from '../shared_types/types';
 
 export interface ITrackAndFieldState {
   laps: string[];
-  trackDistance: number;
   lapDistance: number;
   pacePerLap: ITime;
+  trackDistance: number;
   trackFinishTime: ITime;
   trackAvgPace: ITime;
+}
+
+export interface ILapsContext {
+  state: ITrackAndFieldState;
+  dispatch: React.Dispatch<TrackAndFieldActions>;
 }
 
 interface IGetLaps {

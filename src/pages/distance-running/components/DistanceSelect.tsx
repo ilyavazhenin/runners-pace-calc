@@ -6,7 +6,7 @@ import { ROAD_DISTANCES } from '../../../utils/constants';
 import { ChangeTimeType } from '../../../shared_types/types';
 
 const DistanceSelect = () => {
-  const { state, dispatch } = useContext(SplitsContext)!;
+  const { state, dispatch } = useContext(SplitsContext);
   const handleChange = (e: ChangeTimeType) => {
     dispatch({ type: 'SET_DISTANCE', payload: e.target.value});
     dispatch({ type: 'GET_SPLITS', payload: [] });
