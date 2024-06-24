@@ -1,11 +1,6 @@
-import { IDistanceRunningState } from "../context/DistRunningContext.types";
-import { ITrackAndFieldState } from "../context/TrackAndFieldContext.types";
-
-type generalState = IDistanceRunningState | ITrackAndFieldState;
-
-export const useActualState = (inboundState: generalState): generalState => {
+export const useActualState = <GeneralState>(inboundState: GeneralState): GeneralState => {
   const stateFromSessionStorage = sessionStorage.getItem('state') ?? '{}';
-  const actualState: generalState = {
+  const actualState: GeneralState = {
     ...inboundState,
     ...JSON.parse(stateFromSessionStorage),
   };
