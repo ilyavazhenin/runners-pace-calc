@@ -1,5 +1,6 @@
 import { ITime } from "../shared_types/types";
-import { PartialTime } from "./time-converters.types";
+
+type PartialTime = Partial<ITime>;
 
 const MS_IN_SEC = 1000;
 const MS_IN_MIN = 60000;
