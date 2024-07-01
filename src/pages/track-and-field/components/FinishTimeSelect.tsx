@@ -23,16 +23,16 @@ const FinishTimeSelectGroup = () => {
   const { trackFinishTime, trackAvgPace, lapDistance, trackDistance } = state;
 
   const handleHours = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...trackFinishTime, hrs: e.target.value };
-    dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime }); //TODO: make one dispatch, not many
+    const calculatedFinishTime = { ...trackFinishTime, hrs: Number(e.target.value) };
+    dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
   const handleMins = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...trackFinishTime, mins: e.target.value };
+    const calculatedFinishTime = { ...trackFinishTime, mins: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const handleSecs = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...trackFinishTime, secs: e.target.value };
+    const calculatedFinishTime = { ...trackFinishTime, secs: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
@@ -50,9 +50,9 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="hours-label"
           id="hours"
-          value={trackFinishTime.hrs}
+          value={String(trackFinishTime.hrs)}
           label="hours"
-          onChange={handleHours as any}  // MUI Select bug typization! Had to switch TS off here 
+          onChange={handleHours}
         >
           {HOURS_TO_PICK_FROM.map((el) => (
             <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -65,9 +65,9 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="mins-label"
           id="mins"
-          value={trackFinishTime.mins}
+          value={String(trackFinishTime.mins)}
           label="mins"
-          onChange={handleMins as any}  // MUI Select bug typization! Had to switch TS off here 
+          onChange={handleMins}
         >
           {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
             <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -80,9 +80,9 @@ const FinishTimeSelectGroup = () => {
         <Select
           labelId="secs-label"
           id="secs"
-          value={trackFinishTime.secs}
+          value={String(trackFinishTime.secs)}
           label="secs"
-          onChange={handleSecs as any}  // MUI Select bug typization! Had to switch TS off here 
+          onChange={handleSecs}
         >
           {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
             <MenuItem value={el} key={el}>{`${el}`}</MenuItem>

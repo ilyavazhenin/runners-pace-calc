@@ -1,4 +1,6 @@
-export type ChangeTimeType = React.ChangeEvent<{value: number, name: string}>;
+import { SelectChangeEvent } from "@mui/material";
+
+export type ChangeTimeType = SelectChangeEvent;
 
 export interface ITime {
   hrs: number;

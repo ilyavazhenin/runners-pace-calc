@@ -24,16 +24,16 @@ const FinishTimeSelectGroup = () => {
   const { roadFinishTime, roadDistance } = state;
 
   const handleHours = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...roadFinishTime, hrs: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, hrs: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
   const handleMins = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...roadFinishTime, mins: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, mins: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
   const handleSecs = (e: ChangeTimeType) => {
-    const calculatedFinishTime = { ...roadFinishTime, secs: e.target.value };
+    const calculatedFinishTime = { ...roadFinishTime, secs: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
@@ -53,9 +53,9 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="hours-label"
             id="hours"
-            value={roadFinishTime.hrs}
+            value={String(roadFinishTime.hrs)}
             label="hours"
-            onChange={handleHours as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleHours}
           >
             {HOURS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -68,9 +68,9 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="mins-label"
             id="mins"
-            value={roadFinishTime.mins}
+            value={String(roadFinishTime.mins)}
             label="mins"
-            onChange={handleMins as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleMins}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -83,9 +83,9 @@ const FinishTimeSelectGroup = () => {
           <Select
             labelId="secs-label"
             id="secs"
-            value={roadFinishTime.secs}
+            value={String(roadFinishTime.secs)}
             label="secs"
-            onChange={handleSecs as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleSecs}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>

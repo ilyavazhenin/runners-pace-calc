@@ -21,12 +21,12 @@ const AvgPaceSelect = () => {
   const { trackAvgPace, lapDistance, trackDistance } = state;
 
   const handleMins = (e: ChangeTimeType) => {
-    const calculatableAvgPace = { ...trackAvgPace, mins: e.target.value };
+    const calculatableAvgPace = { ...trackAvgPace, mins: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
   const handleSecs = (e: ChangeTimeType) => {
-    const calculatableAvgPace = { ...trackAvgPace, secs: e.target.value };
+    const calculatableAvgPace = { ...trackAvgPace, secs: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
@@ -47,9 +47,9 @@ const AvgPaceSelect = () => {
           <Select
             labelId="mins-label"
             id="mins"
-            value={trackAvgPace.mins}
+            value={String(trackAvgPace.mins)}
             label="mins"
-            onChange={handleMins as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleMins}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -62,9 +62,9 @@ const AvgPaceSelect = () => {
           <Select
             labelId="secs-label"
             id="secs"
-            value={trackAvgPace.secs}
+            value={String(trackAvgPace.secs)}
             label="secs"
-            onChange={handleSecs as any}  // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleSecs}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>

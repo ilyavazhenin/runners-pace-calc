@@ -21,12 +21,12 @@ const AvgPaceSelect = () => {
   const { roadAvgPace, roadDistance } = state;
 
   const handleMins = (e: ChangeTimeType) => {
-    const calculatableAvgPace = { ...roadAvgPace, mins: e.target.value };
+    const calculatableAvgPace = { ...roadAvgPace, mins: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
   const handleSecs = (e: ChangeTimeType) => {
-    const calculatableAvgPace = { ...roadAvgPace, secs: e.target.value };
+    const calculatableAvgPace = { ...roadAvgPace, secs: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
@@ -46,9 +46,9 @@ const AvgPaceSelect = () => {
           <Select
             labelId="mins-label"
             id="mins"
-            value={roadAvgPace.mins}
+            value={String(roadAvgPace.mins)}
             label="mins"
-            onChange={handleMins as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleMins}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>
@@ -61,9 +61,9 @@ const AvgPaceSelect = () => {
           <Select
             labelId="secs-label"
             id="secs"
-            value={roadAvgPace.secs}
+            value={String(roadAvgPace.secs)}
             label="secs"
-            onChange={handleSecs as any} // MUI Select bug typization! Had to switch TS off here 
+            onChange={handleSecs}
           >
             {MINS_AND_SECS_TO_PICK_FROM.map((el) => (
               <MenuItem value={el} key={el}>{`${el}`}</MenuItem>

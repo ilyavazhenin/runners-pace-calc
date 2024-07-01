@@ -8,7 +8,7 @@ import { ChangeTimeType } from '../../../shared_types/types';
 const DistanceSelect = () => {
   const { state, dispatch } = useContext(SplitsContext);
   const handleChange = (e: ChangeTimeType) => {
-    dispatch({ type: 'SET_DISTANCE', payload: e.target.value});
+    dispatch({ type: 'SET_DISTANCE', payload: Number(e.target.value)});
     dispatch({ type: 'GET_SPLITS', payload: [] });
   };
 
@@ -20,9 +20,10 @@ const DistanceSelect = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={state.roadDistance}
+          value={String(state.roadDistance)}
+          type="number"
           label="Distance"
-          onChange={handleChange as any} // MUI Select bug typization! Had to switch TS off here 
+          onChange={handleChange} // MUI Select bug typization! Had to switch TS off here 
         >
           {ROAD_DISTANCES.map((dist) => (
             <MenuItem key={dist} value={dist}>

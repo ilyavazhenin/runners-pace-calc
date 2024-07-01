@@ -6,8 +6,8 @@ import { ChangeTimeType } from '../../../shared_types/types';
 const LapDistanceSelect = () => {
   const { state, dispatch } = useContext(LapsContext);
   const handleChange = (e: ChangeTimeType) => {
-    dispatch({ type: 'SET_LAP_DISTANCE', payload: e.target.value });
-    dispatch({ type: 'GET_LAPS', payload: [] }); // kind of an extra reducer
+    dispatch({ type: 'SET_LAP_DISTANCE', payload: Number(e.target.value) });
+    dispatch({ type: 'GET_LAPS', payload: [] });
   };
 
   return (
@@ -18,9 +18,9 @@ const LapDistanceSelect = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={state.lapDistance}
+          value={String(state.lapDistance)}
           label="Lap Distance"
-          onChange={handleChange as any}  // MUI Select bug typization! Had to switch TS off here 
+          onChange={handleChange}
         >
           <MenuItem value={200}>200 м</MenuItem>
           <MenuItem value={400}>400 м</MenuItem>
