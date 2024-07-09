@@ -56,17 +56,6 @@ const calcFinishTimeTF = (distanceInMeters: number, pace: ITime) => {
   return finishTime;
 };
 
-// for tests, gonna remove later:
-
-// const checkTime = {
-//   hrs: 1,
-//   mins: 27,
-//   secs: 40,
-//   mss: 323,
-// };
-
-// const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
-
 const parseTimeString = (timeString: string) => {
   const timeArray = timeString.split(':');
   if (timeArray.length === 2) {
@@ -99,19 +88,6 @@ const getEvenStringedSplitsArray = (pace: ITime, distance: number) => {
   return stringedArray;
 };
 
-// deprecated func:
-
-// const getSummaryTimesBySplit = (splitsArr) => {
-//   let sum = 0;
-//   const sumTimeBySplit = splitsArr.map((split) => {
-//     // convert to MS and back to string
-//     sum += convertTimeToMs(parseTimeString(split));
-//     return getTimeString(convertTimeToObj(sum));
-//   });
-
-//   return sumTimeBySplit;
-// };
-
 const calcPacePerLap = (pace: ITime, lapLengthInMeters: number) => {
   const lapsPer1000m = lapLengthInMeters === 200 ? 5 : 2.5;
   const pacePerLap = convertTimeToMs(pace) / lapsPer1000m;
@@ -143,21 +119,18 @@ const getPacePerLapArray = (pace: ITime, lapLengthInMeters: number, distanceInMe
   return pacesArray;
 };
 
-// console.log(convertTimeToMs(checkTime), 'time to ms');
-// console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
-// console.log(calcPaceTime(21.1, checkTime), 'pace');
-// console.log(calcFinishTime(21.1, somePace), 'finish time');
-// console.log(getTimeString(calcFinishTime(21.1, somePace)), 'time string');
-// console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
-// console.log(getEvenStringedSplitsArray(somePace, 21.1), 'stringed array of pace');
+//TODO: write tests in the future
 
-// const exampleArr = ['30:15', '30:15', '30:15', '30:15'];
-// console.log(getSummaryTimesBySplit(exampleArr), 'ARR');
-// console.log(calcPacePerLap(somePace, 200));
-// console.log(getPaceString(calcPacePerLap(somePace, 200)));
-// console.log('arrays:');
-// console.log(getPacePerLapArray(somePace, 200, 2000));
-// console.log(getPacePerLapArray(somePace, 400, 3000));
+// for tests, gonna remove later:
+
+// const checkTime = {
+//   hrs: 1,
+//   mins: 27,
+//   secs: 40,
+//   mss: 323,
+// };
+
+// const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
 
 export {
   calcPaceTime,

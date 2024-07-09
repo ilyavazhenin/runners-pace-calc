@@ -11,9 +11,7 @@ export const Navigation = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      
-    >
+    <Box>
       <BottomNavigation
       sx={{
         position: 'fixed',
