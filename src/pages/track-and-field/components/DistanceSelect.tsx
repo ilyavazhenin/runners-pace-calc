@@ -1,8 +1,8 @@
 import { InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { LapsContext } from '../../../context/TrackAndFieldContext';
+import { LapsContext } from '../../../store/TrackAndFieldContext';
 import { useContext } from 'react';
 import { TRACK_DISTANCES } from '../../../utils/constants';
-import { ChangeTimeType } from '../../../shared_types/types';
+import { ChangeTimeType } from '../../../shared-types/types';
 
 const DistanceSelect = () => {
   const { state, dispatch } = useContext(LapsContext);

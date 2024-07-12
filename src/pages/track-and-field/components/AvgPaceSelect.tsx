@@ -11,10 +11,10 @@ import {
   getPacePerLapArray,
   // calcPacePerLap,
 } from '../../../utils/time-converters';
-import { LapsContext } from '../../../context/TrackAndFieldContext';
+import { LapsContext } from '../../../store/TrackAndFieldContext';
 import { useContext } from 'react';
 import { MINS_AND_SECS_TO_PICK_FROM } from '../../../utils/constants';
-import { ChangeTimeType } from '../../../shared_types/types';
+import { ChangeTimeType } from '../../../shared-types/types';
 
 const AvgPaceSelect = () => {
   const { state, dispatch } = useContext(LapsContext);

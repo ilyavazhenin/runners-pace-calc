@@ -10,14 +10,14 @@ import {
   calcPaceTime,
   getEvenStringedSplitsArray,
 } from '../../../utils/time-converters';
-import { SplitsContext } from '../../../context/DistRunningContext';
+import { SplitsContext } from '../../../store/DistRunningContext';
 import { useContext } from 'react';
 import {
   MINS_AND_SECS_TO_PICK_FROM,
   HOURS_TO_PICK_FROM,
 } from '../../../utils/constants';
 
-import { ChangeTimeType } from '../../../shared_types/types';
+import { ChangeTimeType } from '../../../shared-types/types';
 
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);

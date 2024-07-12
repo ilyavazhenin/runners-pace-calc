@@ -3,7 +3,7 @@ import {
   SplitsContext,
   reducer,
   initialState,
-} from '../../context/DistRunningContext';
+} from '../../store/DistRunningContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
 import DistanceSelect from './components/DistanceSelect';
 import FinishTimeSelectGroup from './components/FinishTimeSelect';

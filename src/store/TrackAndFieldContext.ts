@@ -3,7 +3,7 @@ import {
   ILapsContext,
   ITrackAndFieldState,
   TrackAndFieldActions,
-} from './TrackAndFieldContext.types';
+} from './types/TrackAndFieldContext.types';
 
 export const LapsContext = createContext<ILapsContext>({} as ILapsContext);
 

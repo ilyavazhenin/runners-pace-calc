@@ -1,9 +1,9 @@
 import { InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { SplitsContext } from '../../../context/DistRunningContext';
+import { SplitsContext } from '../../../store/DistRunningContext';
 import { useContext } from 'react';
 import { ROAD_DISTANCES } from '../../../utils/constants';
 
-import { ChangeTimeType } from '../../../shared_types/types';
+import { ChangeTimeType } from '../../../shared-types/types';
 
 const DistanceSelect = () => {
   const { state, dispatch } = useContext(SplitsContext);

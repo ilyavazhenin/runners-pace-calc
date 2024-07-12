@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { LapsContext } from '../../../context/TrackAndFieldContext';
+import { LapsContext } from '../../../store/TrackAndFieldContext';
 import {
   convertTimeToMs,
   parseTimeString,

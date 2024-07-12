@@ -3,7 +3,7 @@ import {
   DistRunningActions,
   IDistanceRunningState,
   ISplitsContext,
-} from './DistRunningContext.types';
+} from './types/DistRunningContext.types';
 
 export const SplitsContext = createContext<ISplitsContext>({} as ISplitsContext);
 

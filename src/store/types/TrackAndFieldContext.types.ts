@@ -1,4 +1,4 @@
-import { ITime } from '../shared_types/types';
+import { ITime } from '../../shared-types/types';
 
 export interface ITrackAndFieldState {
   laps: string[];

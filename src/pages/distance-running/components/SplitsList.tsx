@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SplitsContext } from '../../../context/DistRunningContext';
+import { SplitsContext } from '../../../store/DistRunningContext';
 import {
   convertTimeToMs,
   parseTimeString,
