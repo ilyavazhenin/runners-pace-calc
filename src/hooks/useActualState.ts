@@ -1,6 +1,6 @@
-export const useActualState = (inboundState) => {
+export const useActualState = <GeneralState>(inboundState: GeneralState): GeneralState => {
   const stateFromSessionStorage = sessionStorage.getItem('state') ?? '{}';
-  const actualState = {
+  const actualState: GeneralState = {
     ...inboundState,
     ...JSON.parse(stateFromSessionStorage),
   };

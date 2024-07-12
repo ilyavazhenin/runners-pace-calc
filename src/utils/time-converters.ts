@@ -1,26 +1,30 @@
+import { ITime } from "../shared-types/types";
+
+type PartialTime = Partial<ITime>;
+
 const MS_IN_SEC = 1000;
 const MS_IN_MIN = 60000;
 const MS_IN_HR = 3600000;
 
-const convertTimeToMs = (time) =>
+const convertTimeToMs = (time: ITime) =>
   time.hrs * MS_IN_HR +
   time.mins * MS_IN_MIN +
   time.secs * MS_IN_SEC +
   time.mss;
 
-const getTimeString = ({ hrs, mins, secs }) => {
-  const hrsStr = hrs / 10 >= 1 ? `${hrs}` : `0${hrs}`;
-  const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
-  const secsStr = secs / 10 >= 1 ? `${secs}` : `0${secs}`;
+const getTimeString = ({ hrs, mins, secs }: PartialTime) => {
+  const hrsStr = hrs! / 10 >= 1 ? `${hrs}` : `0${hrs}`;
+  const minsStr = mins! / 10 >= 1 ? `${mins}` : `0${mins}`;
+  const secsStr = secs! / 10 >= 1 ? `${secs}` : `0${secs}`;
   return `${hrsStr ?? ''}:${minsStr ?? ''}:${secsStr ?? ''}`;
 };
-const getPaceString = ({ mins, secs }) => {
-  const minsStr = mins / 10 >= 1 ? `${mins}` : `0${mins}`;
-  const secsStr = secs / 10 >= 1 ? `${secs}` : `0${secs}`;
+const getPaceString = ({ mins, secs }: PartialTime) => {
+  const minsStr = mins! / 10 >= 1 ? `${mins}` : `0${mins}`;
+  const secsStr = secs! / 10 >= 1 ? `${secs}` : `0${secs}`;
   return `${minsStr}:${secsStr}`;
 };
 
-const convertTimeToObj = (timeInMs) => {
+const convertTimeToObj = (timeInMs: number) => {
   const hrs = Math.floor(timeInMs / MS_IN_HR);
   const mins = Math.floor((timeInMs % MS_IN_HR) / MS_IN_MIN);
   const secs = Math.floor(((timeInMs % MS_IN_HR) % MS_IN_MIN) / MS_IN_SEC);
@@ -34,36 +38,25 @@ const convertTimeToObj = (timeInMs) => {
   };
 };
 
-const calcPaceTime = (distInKm, timeObj) => {
+const calcPaceTime = (distInKm: number, timeObj: ITime) => {
   const timeInMs = convertTimeToMs(timeObj);
   const paceInMsPerKm = timeInMs / distInKm; // time, ms per km.
   return convertTimeToObj(paceInMsPerKm);
 };
 
-const calcFinishTime = (distanceInKM, pace) => {
+const calcFinishTime = (distanceInKM: number, pace: ITime) => {
   const finishTimeInMs = distanceInKM * convertTimeToMs(pace);
   const finishTime = convertTimeToObj(finishTimeInMs);
   return finishTime;
 };
 
-const calcFinishTimeTF = (distanceInMeters, pace) => {
+const calcFinishTimeTF = (distanceInMeters: number, pace: ITime) => {
   const finishTimeInMs = (distanceInMeters / 1000) * convertTimeToMs(pace);
   const finishTime = convertTimeToObj(finishTimeInMs);
   return finishTime;
 };
 
-// for tests, gonna remove later:
-
-// const checkTime = {
-//   hrs: 1,
-//   mins: 27,
-//   secs: 40,
-//   mss: 323,
-// };
-
-// const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
-
-const parseTimeString = (timeString) => {
+const parseTimeString = (timeString: string) => {
   const timeArray = timeString.split(':');
   if (timeArray.length === 2) {
     timeArray.unshift('0');
@@ -79,10 +72,10 @@ const parseTimeString = (timeString) => {
   return time;
 };
 
-const getEvenStringedSplitsArray = (pace, distance) => {
+const getEvenStringedSplitsArray = (pace: ITime, distance: number) => {
   const paceString = getPaceString(pace);
   const stringedArray = [];
-  const arrayLengthByDistance = parseInt(distance);
+  const arrayLengthByDistance = parseInt(String(distance));
   for (let i = 1; i <= arrayLengthByDistance; i += 1) {
     stringedArray.push(paceString);
   }
@@ -95,26 +88,13 @@ const getEvenStringedSplitsArray = (pace, distance) => {
   return stringedArray;
 };
 
-// deprecated func:
-
-// const getSummaryTimesBySplit = (splitsArr) => {
-//   let sum = 0;
-//   const sumTimeBySplit = splitsArr.map((split) => {
-//     // convert to MS and back to string
-//     sum += convertTimeToMs(parseTimeString(split));
-//     return getTimeString(convertTimeToObj(sum));
-//   });
-
-//   return sumTimeBySplit;
-// };
-
-const calcPacePerLap = (pace, lapLengthInMeters) => {
+const calcPacePerLap = (pace: ITime, lapLengthInMeters: number) => {
   const lapsPer1000m = lapLengthInMeters === 200 ? 5 : 2.5;
   const pacePerLap = convertTimeToMs(pace) / lapsPer1000m;
   return convertTimeToObj(pacePerLap);
 };
 
-const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
+const getPacePerLapArray = (pace: ITime, lapLengthInMeters: number, distanceInMeters: number) => {
   const pacePerLap = calcPacePerLap(pace, lapLengthInMeters);
   const pacePerLapString = getPaceString(pacePerLap);
 
@@ -139,21 +119,18 @@ const getPacePerLapArray = (pace, lapLengthInMeters, distanceInMeters) => {
   return pacesArray;
 };
 
-// console.log(convertTimeToMs(checkTime), 'time to ms');
-// console.log(convertTimeToObj(convertTimeToMs(checkTime)), 'time to obj');
-// console.log(calcPaceTime(21.1, checkTime), 'pace');
-// console.log(calcFinishTime(21.1, somePace), 'finish time');
-// console.log(getTimeString(calcFinishTime(21.1, somePace)), 'time string');
-// console.log(parseTimeString(getTimeString(calcFinishTime(21.1, somePace))), 'time from string');
-// console.log(getEvenStringedSplitsArray(somePace, 21.1), 'stringed array of pace');
+//TODO: write tests in the future
 
-// const exampleArr = ['30:15', '30:15', '30:15', '30:15'];
-// console.log(getSummaryTimesBySplit(exampleArr), 'ARR');
-// console.log(calcPacePerLap(somePace, 200));
-// console.log(getPaceString(calcPacePerLap(somePace, 200)));
-// console.log('arrays:');
-// console.log(getPacePerLapArray(somePace, 200, 2000));
-// console.log(getPacePerLapArray(somePace, 400, 3000));
+// for tests, gonna remove later:
+
+// const checkTime = {
+//   hrs: 1,
+//   mins: 27,
+//   secs: 40,
+//   mss: 323,
+// };
+
+// const somePace = { hrs: 0, mins: 4, secs: 16, mss: 0 };
 
 export {
   calcPaceTime,

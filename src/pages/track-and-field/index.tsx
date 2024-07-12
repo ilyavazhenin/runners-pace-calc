@@ -3,7 +3,7 @@ import {
   LapsContext,
   reducer,
   initialState,
-} from '../../context/TrackAndFieldContext';
+} from '../../store/TrackAndFieldContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
 // import FinishTimeSelectGroup from './components/FinishTimeSelect';
 import LapsList from './components/LapsList';

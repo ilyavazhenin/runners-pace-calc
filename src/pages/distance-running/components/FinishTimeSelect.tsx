@@ -10,28 +10,30 @@ import {
   calcPaceTime,
   getEvenStringedSplitsArray,
 } from '../../../utils/time-converters';
-import { SplitsContext } from '../../../context/DistRunningContext';
+import { SplitsContext } from '../../../store/DistRunningContext';
 import { useContext } from 'react';
 import {
   MINS_AND_SECS_TO_PICK_FROM,
   HOURS_TO_PICK_FROM,
 } from '../../../utils/constants';
 
+import { ChangeTimeType } from '../../../shared-types/types';
+
 const FinishTimeSelectGroup = () => {
   const { state, dispatch } = useContext(SplitsContext);
   const { roadFinishTime, roadDistance } = state;
 
-  const handleHours = (e) => {
-    const calculatedFinishTime = { ...roadFinishTime, hrs: e.target.value };
+  const handleHours = (e: ChangeTimeType) => {
+    const calculatedFinishTime = { ...roadFinishTime, hrs: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
-  const handleMins = (e) => {
-    const calculatedFinishTime = { ...roadFinishTime, mins: e.target.value };
+  const handleMins = (e: ChangeTimeType) => {
+    const calculatedFinishTime = { ...roadFinishTime, mins: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
-  const handleSecs = (e) => {
-    const calculatedFinishTime = { ...roadFinishTime, secs: e.target.value };
+  const handleSecs = (e: ChangeTimeType) => {
+    const calculatedFinishTime = { ...roadFinishTime, secs: Number(e.target.value) };
     dispatch({ type: 'SET_FINISH_TIME', payload: calculatedFinishTime });
   };
 
@@ -46,12 +48,12 @@ const FinishTimeSelectGroup = () => {
     <>
       <h4>Выбери финишное время</h4>
       <Stack direction={'row'}>
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="hours-label">Часов</InputLabel>
           <Select
             labelId="hours-label"
             id="hours"
-            value={roadFinishTime.hrs}
+            value={String(roadFinishTime.hrs)}
             label="hours"
             onChange={handleHours}
           >
@@ -61,12 +63,12 @@ const FinishTimeSelectGroup = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="mins-label">Минут</InputLabel>
           <Select
             labelId="mins-label"
             id="mins"
-            value={roadFinishTime.mins}
+            value={String(roadFinishTime.mins)}
             label="mins"
             onChange={handleMins}
           >
@@ -76,12 +78,12 @@ const FinishTimeSelectGroup = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="secs-label">Секунд</InputLabel>
           <Select
             labelId="secs-label"
             id="secs"
-            value={roadFinishTime.secs}
+            value={String(roadFinishTime.secs)}
             label="secs"
             onChange={handleSecs}
           >

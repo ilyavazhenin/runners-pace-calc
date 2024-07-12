@@ -7,44 +7,47 @@ import {
   Stack,
 } from '@mui/material';
 import {
-  calcFinishTime,
-  getEvenStringedSplitsArray,
+  calcFinishTimeTF,
+  getPacePerLapArray,
+  // calcPacePerLap,
 } from '../../../utils/time-converters';
-import { SplitsContext } from '../../../context/DistRunningContext';
+import { LapsContext } from '../../../store/TrackAndFieldContext';
 import { useContext } from 'react';
 import { MINS_AND_SECS_TO_PICK_FROM } from '../../../utils/constants';
+import { ChangeTimeType } from '../../../shared-types/types';
 
 const AvgPaceSelect = () => {
-  const { state, dispatch } = useContext(SplitsContext);
-  const { roadAvgPace, roadDistance } = state;
+  const { state, dispatch } = useContext(LapsContext);
+  const { trackAvgPace, lapDistance, trackDistance } = state;
 
-  const handleMins = (e) => {
-    const calculatableAvgPace = { ...roadAvgPace, mins: e.target.value };
+  const handleMins = (e: ChangeTimeType) => {
+    const calculatableAvgPace = { ...trackAvgPace, mins: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
-  const handleSecs = (e) => {
-    const calculatableAvgPace = { ...roadAvgPace, secs: e.target.value };
+  const handleSecs = (e: ChangeTimeType) => {
+    const calculatableAvgPace = { ...trackAvgPace, secs: Number(e.target.value) };
     dispatch({ type: 'SET_AVGPACE', payload: calculatableAvgPace });
   };
 
   const getFinishTime = () => {
-    const finishTime = calcFinishTime(roadDistance, roadAvgPace);
-    const splits = getEvenStringedSplitsArray(roadAvgPace, roadDistance);
-    dispatch({ type: 'GET_SPLITS', payload: splits });
+    const finishTime = calcFinishTimeTF(trackDistance, trackAvgPace);
+    const laps = getPacePerLapArray(trackAvgPace, lapDistance, trackDistance);
+
+    dispatch({ type: 'GET_LAPS', payload: laps });
     return dispatch({ type: 'SET_FINISH_TIME', payload: finishTime });
   };
 
   return (
     <>
-      <h4>Или выбери целевой темп на км</h4>
+      <h4>Выбери целевой темп на км</h4>
       <Stack direction={'row'}>
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="mins-label">Минут</InputLabel>
           <Select
             labelId="mins-label"
             id="mins"
-            value={roadAvgPace.mins}
+            value={String(trackAvgPace.mins)}
             label="mins"
             onChange={handleMins}
           >
@@ -54,12 +57,12 @@ const AvgPaceSelect = () => {
           </Select>
         </FormControl>
 
-        <FormControl size="large" sx={{ m: 1, minWidth: 80 }}>
+        <FormControl size="medium" sx={{ m: 1, minWidth: 80 }}>
           <InputLabel id="secs-label">Секунд</InputLabel>
           <Select
             labelId="secs-label"
             id="secs"
-            value={roadAvgPace.secs}
+            value={String(trackAvgPace.secs)}
             label="secs"
             onChange={handleSecs}
           >
@@ -70,7 +73,7 @@ const AvgPaceSelect = () => {
         </FormControl>
       </Stack>
       <Button variant="contained" onClick={getFinishTime}>
-        Рассчитать финишное время и раскладку
+        Рассчитать время на круг и раскладку
       </Button>
     </>
   );
