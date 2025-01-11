@@ -16,27 +16,22 @@ const LapsList = () => {
   return (
     <ul style={{ listStyleType: 'none', marginBottom: '65px' }}>
       {state?.laps?.length
-        ? state.laps.map((lap, index) => {
+        ? state.laps.map((lap, index) => { // using index as key in my case is OK coz the elements or their order won't change
             timeSumByLap += convertTimeToMs(parseTimeString(lap));
-            const timeSumByLapString = getTimeString(
-              convertTimeToObj(timeSumByLap)
-            );
+            const timeSumByLapString = getTimeString(convertTimeToObj(timeSumByLap));
             const currentDistance = lapDistance + lapDistance * index;
+
             if (index === state.laps.length - 1)
               return (
-                <li
-                  key={index}
-                >{`${lastLapDistance}m – ${lap} – ${timeSumByLapString}`}</li>
+                <li key={index}>{`${lastLapDistance}m – ${lap} – ${timeSumByLapString}`}</li>
               );
-            else
-              return (
-                <li
-                  key={index}
-                >{`${currentDistance}m – ${lap} – ${timeSumByLapString}`}</li>
-              );
+
+            return (
+              <li key={index}>{`${currentDistance}m – ${lap} – ${timeSumByLapString}`}</li>
+            );
           })
         : null}
-    </ul> // using index as key in my case is OK coz the elemnts or their order won't change
+    </ul> 
   );
 };
 

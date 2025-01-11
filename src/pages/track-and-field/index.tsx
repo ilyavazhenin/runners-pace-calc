@@ -5,7 +5,6 @@ import {
   initialState,
 } from '../../store/TrackAndFieldContext';
 import AvgPaceSelect from './components/AvgPaceSelect';
-// import FinishTimeSelectGroup from './components/FinishTimeSelect';
 import LapsList from './components/LapsList';
 import LapDistanceSelect from './components/LapDistanceSelect';
 import Stack from '@mui/material/Stack';
@@ -25,7 +24,6 @@ const TrackAndFieldPage = () => {
       <LapsContext.Provider value={{ state, dispatch }}>
         <DistanceSelect />
         <LapDistanceSelect />
-        {/* <FinishTimeSelectGroup /> */}
         <AvgPaceSelect />
         <LapsList />
       </LapsContext.Provider>

@@ -105,23 +105,23 @@ const getPacePerLapArray = (pace: ITime, lapLengthInMeters: number, distanceInMe
     pacesArray.push(pacePerLapString);
   }
 
-  const isThereLastHalfLap =
+  const isLastLapNotFull =
     distanceInMeters % lapLengthInMeters > 0 ? true : false;
+
+  const isLastLap300meters = (lapLengthInMeters === 400 && distanceInMeters === 1500) ? true : false;
   
-  if (isThereLastHalfLap) {
+  if (isLastLapNotFull) {
     const pacePerLapInMs = convertTimeToMs(pacePerLap);
-    const halfLapPaceInMs = Math.floor(pacePerLapInMs / 2);
-    const halfLapPace = convertTimeToObj(halfLapPaceInMs);
-    const halfLapPaceString = getPaceString(halfLapPace);
-    pacesArray.push(halfLapPaceString);
+    const notFullLastLapPaceInMs = isLastLap300meters ? Math.floor((pacePerLapInMs / 4) * 3) : Math.floor(pacePerLapInMs / 2);
+    const notFullLastLapPace = convertTimeToObj(notFullLastLapPaceInMs);
+    const notFullLastLapPaceString = getPaceString(notFullLastLapPace);
+    pacesArray.push(notFullLastLapPaceString);
   }
 
   return pacesArray;
 };
 
-//TODO: write tests in the future
-
-// for tests, gonna remove later:
+// for debugging, gonna remove later:
 
 // const checkTime = {
 //   hrs: 1,
