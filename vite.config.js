@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     VitePWA(
       {
+        registerType: 'autoUpdate',
         injectRegister: 'auto',
         includeAssets: ["**/*"],
         manifest: 
@@ -30,14 +31,13 @@ export default defineConfig({
                 sizes: "512x512"
               }
             ],
-            start_url: "/distancerun",
-            id: "/distancerun",
+            start_url: ".",
             display: "standalone",
             theme_color: "#ffffff",
             background_color: "#ffffff",
             screenshots: [
               {
-              src: "distance1.jpg",
+                src: "distance1.jpg",
                 sizes: "590x1212",
                 type: "image/jpg",
                 form_factor: "narrow",
@@ -53,7 +53,7 @@ export default defineConfig({
           ]
           },
           workbox: {
-            globPatterns: ["**/*"],
+            globPatterns: ["**/*{html, css, js, ico, png, svg, jpg}"],
             navigateFallback: '/distancerun',
           },
           devOptions: {

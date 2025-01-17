@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/distancerun" />} />
-          <Route path="distancerun" element={<DistanceRunningPage />} />
-          <Route path="track" element={<TrackAndFieldPage />} />
+          <Route path="/distancerun" element={<DistanceRunningPage />} />
+          <Route path="/track" element={<TrackAndFieldPage />} />
         </Routes>
         <Navigation />
       </BrowserRouter>
