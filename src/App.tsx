@@ -2,20 +2,21 @@ import './App.css';
 import DistanceRunningPage from './pages/distance-running';
 import { Navigation } from './pages/shared-components/Navigation';
 import TrackAndFieldPage from './pages/track-and-field';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ReloadPrompt from './ReloadPrompt';
 
 function App() {
 	return (
     <BrowserRouter>
 		<div className="App">
-				<Routes>index.html
+				<Routes>
 					<Route
 						path='/'
-						element={<Navigate to='/distancerun' />}
+						element={<DistanceRunningPage />}
 					/>
 					<Route
 						path='/index.html'
-						element={<Navigate to='/distancerun' />}
+						element={<DistanceRunningPage />}
 					/>
 					<Route
 						path='/distancerun'
@@ -27,6 +28,7 @@ function App() {
 					/>
 				</Routes>
 				<Navigation />
+				<ReloadPrompt />
 		</div>
     </BrowserRouter>
 	);

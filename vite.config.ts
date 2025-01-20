@@ -49,6 +49,7 @@ export default defineConfig({
 	plugins: [
 		react(),
 		VitePWA({
+			base: '/',
 			registerType: 'autoUpdate',
 			injectRegister: 'auto',
 			includeAssets: ['**/*'],
@@ -63,6 +64,8 @@ export default defineConfig({
 			},
 			devOptions: {
 				enabled: true,
+				navigateFallback: 'index.html',
+
 			},
 		}),
 	],
