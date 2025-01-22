@@ -4,11 +4,11 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RouteIcon from '@mui/icons-material/Route';
 import SegmentIcon from '@mui/icons-material/Segment';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router";
 
 export const Navigation = () => {
   const [value, setValue] = useState('/distancerun');
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <Box>
@@ -31,13 +31,14 @@ export const Navigation = () => {
       >
         <BottomNavigationAction
           label="Длинные дистанции"
+          value="/distancerun"
           icon={<RouteIcon />}
-          value={'/distancerun'}
         />
-        <BottomNavigationAction
+        
+        <BottomNavigationAction 
           label="Манеж и стадион"
+          value="/track"
           icon={<SegmentIcon />}
-          value={'/track'}
         />
       </BottomNavigation>
     </Box>
