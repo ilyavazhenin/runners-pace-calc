@@ -19,10 +19,6 @@ function App() {
 							element={<DistanceRunningPage />}
 						/>
 						<Route
-							path='/distancerun'
-							element={<DistanceRunningPage />}
-						/>
-						<Route
 							path='/track'
 							element={<TrackAndFieldPage />}
 						/>
