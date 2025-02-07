@@ -7,7 +7,7 @@ import SegmentIcon from '@mui/icons-material/Segment';
 import { useNavigate } from "react-router";
 
 export const Navigation = () => {
-  const [value, setValue] = useState('/distancerun');
+  const [value, setValue] = useState('/');
   const navigate = useNavigate()
 
   return (
@@ -31,7 +31,7 @@ export const Navigation = () => {
       >
         <BottomNavigationAction
           label="Длинные дистанции"
-          value="/distancerun"
+          value="/"
           icon={<RouteIcon />}
         />
         
